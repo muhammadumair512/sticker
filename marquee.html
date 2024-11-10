@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Circular Marquee Text</title>
+    <style>
+      /* Root element for radius customization */
+      :root {
+        --radius: 100px; /* Adjust the radius of the circular path */
+      }
+
+      .marquee-container {
+        position: relative;
+        width: calc(var(--radius) * 2);
+        height: calc(var(--radius) * 2);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+      }
+
+      .marquee-text {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform-origin: center var(--radius);
+        white-space: nowrap;
+        animation: rotateText 10s linear infinite;
+      }
+
+      /* Rotate the entire text around the circular path */
+      @keyframes rotateText {
+        from {
+          transform: rotate(0deg);
+        }
+        to {
+          transform: rotate(360deg);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="marquee-container">
+      <div class="marquee-text">This is a marquee text moving in a circle</div>
+    </div>
+  </body>
+</html>

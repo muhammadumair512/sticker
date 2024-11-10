@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      /* Outer circle with holographic effect */
+      .hologram-sticker {
+        position: relative;
+        width: 250px;
+        height: 250px;
+        border-radius: 50%;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+      }
+
+      /* Specular holographic layer */
+      .specular-layer {
+        position: absolute;
+        inset: 0;
+        border-radius: 50%;
+        background: linear-gradient(
+          135deg,
+          rgba(255, 0, 255, 0.5),
+          rgba(0, 255, 255, 0.5)
+        );
+        background-attachment: fixed;
+        mix-blend-mode: color-burn;
+        opacity: 0.7;
+        animation: holographicMove 5s linear infinite;
+      }
+
+      /* Inner circle */
+      .inner-circle {
+        position: relative;
+        width: 70%;
+        height: 70%;
+        border-radius: 50%;
+        background: rgba(0, 0, 0, 0.7);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        z-index: 2;
+        overflow: hidden;
+      }
+
+      /* Centered text inside the circle */
+      .centered-text {
+        font-family: Arial, sans-serif;
+        color: #fff;
+        font-size: 1.5em;
+        font-weight: bold;
+        text-transform: uppercase;
+        z-index: 2;
+        position: absolute;
+      }
+
+      /* Circular stamp text */
+      .stamp-text {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+      }
+
+      .stamp-text p {
+        font-size: 0.8em;
+        color: rgba(255, 255, 255, 0.8);
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        white-space: nowrap;
+        transform: rotate(-15deg); /* Adjust rotation for better alignment */
+        position: absolute;
+        width: 150%;
+        text-align: center;
+        font-weight: bold;
+        mix-blend-mode: screen;
+      }
+
+      /* Text around the border */
+      .rotating-text {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        animation: rotateText 15s linear infinite;
+      }
+
+      .rotating-text p {
+        font-size: 1.1em;
+        font-weight: bold;
+        color: rgba(255, 255, 255, 0.8);
+        white-space: nowrap;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        transform: rotate(90deg);
+        mix-blend-mode: screen;
+      }
+
+      /* Holographic background animation */
+      @keyframes holographicMove {
+        0% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
+        100% {
+          background-position: 0% 50%;
+        }
+      }
+
+      /* Rotating text animation */
+      @keyframes rotateText {
+        from {
+          transform: rotate(0deg);
+        }
+        to {
+          transform: rotate(360deg);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="hologram-sticker">
+      <div class="specular-layer"></div>
+      <div class="inner-circle">
+        <span class="centered-text">CSS</span>
+        <div class="stamp-text">
+          <p>100% FREE FROM JAVASCRIPT</p>
+        </div>
+      </div>
+      <div class="rotating-text">
+        <p>CSS IS AWESOME CSS IS AWESOME CSS IS AWESOME CSS IS AWESOME</p>
+      </div>
+    </div>
+  </body>
+</html>

@@ -3,7 +3,61 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Gyro Gradient Circle</title>
+    <style>
+      /* Root element for size customization */
+      :root {
+        --circle-size: 200px; /* Adjust the size of the circle */
+      }
+
+      /* Circle container */
+      .circle {
+        width: var(--circle-size);
+        height: var(--circle-size);
+        border-radius: 50%;
+        background: radial-gradient(circle, #ff00ff, #00ffff, #ff0000);
+        transition: background-position 0.1s ease;
+      }
+
+      /* Centering the circle in the view */
+      .container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        background-color: #000;
+      }
+    </style>
   </head>
-  <body></body>
+  <body>
+    <div class="container">
+      <div class="circle"></div>
+    </div>
+
+    <script>
+      // Check if the device orientation is supported
+      if (window.DeviceOrientationEvent) {
+        window.addEventListener("deviceorientation", (event) => {
+          // Capture device tilt angles
+          const { beta, gamma } = event;
+
+          // Map beta and gamma values to x, y positions for gradient
+          // Constrain to a reasonable range for better control over the effect
+          const x = Math.min(Math.max(gamma, -30), 30); // left-right tilt
+          const y = Math.min(Math.max(beta, -30), 30); // front-back tilt
+
+          // Convert to percentages to set gradient position
+          const xPercent = 50 + (x / 30) * 50;
+          const yPercent = 50 + (y / 30) * 50;
+
+          // Apply gradient position based on device tilt
+          document.querySelector(
+            ".circle"
+          ).style.backgroundPosition = `${xPercent}% ${yPercent}%`;
+        });
+      } else {
+        console.log("Device orientation is not supported on this device.");
+      }
+    </script>
+  </body>
 </html>
