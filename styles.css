@@ -1,0 +1,31 @@
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  margin: 0;
+  background-color: #222;
+}
+
+.gradient-circle {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  background: linear-gradient(45deg, #ff00ff, #00ffff, #ffaa00, #aaff00);
+  background-size: 400% 400%;
+  animation: gradient-animation 3s infinite;
+  transition: background 0.2s;
+}
+
+/* Desktop animation for the gradient */
+@keyframes gradient-animation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}

@@ -3,60 +3,66 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Gyro Gradient Circle</title>
+    <title>Document</title>
     <style>
-      /* Root element for size customization */
-      :root {
-        --circle-size: 200px; /* Adjust the size of the circle */
-      }
-
-      /* Circle container */
-      .circle {
-        width: var(--circle-size);
-        height: var(--circle-size);
-        border-radius: 50%;
-        background: radial-gradient(circle, #ff00ff, #00ffff, #ff0000);
-        transition: background-position 0.1s ease;
-      }
-
-      /* Centering the circle in the view */
-      .container {
+      body {
         display: flex;
         align-items: center;
         justify-content: center;
         height: 100vh;
-        background-color: #000;
+        margin: 0;
+        background-color: #222;
+      }
+
+      .gradient-circle {
+        width: 200px;
+        height: 200px;
+        border-radius: 50%;
+        background: linear-gradient(45deg, #ff00ff, #00ffff, #ffaa00, #aaff00);
+        background-size: 400% 400%;
+        animation: gradient-animation 3s infinite;
+        transition: background 0.2s;
+      }
+
+      /* Desktop animation for the gradient */
+      @keyframes gradient-animation {
+        0% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
+        100% {
+          background-position: 0% 50%;
+        }
       }
     </style>
   </head>
   <body>
-    <div class="container">
-      <div class="circle"></div>
-    </div>
+    <div class="gradient-circle"></div>
 
     <script>
-      // Check if the device orientation is supported
+      // Function to update gradient based on device tilt
+      function updateGradient(tiltX, tiltY) {
+        const gradientCircle = document.querySelector(".gradient-circle");
+
+        // Map the tilt values to angle degrees
+        const angleX = Math.min(Math.max(tiltX, -90), 90) + 90;
+        const angleY = Math.min(Math.max(tiltY, -90), 90) + 90;
+        const angle = angleX * 0.5 + angleY * 0.5; // Adjust the weight if needed
+
+        // Update the gradient angle
+        gradientCircle.style.background = `linear-gradient(${angle}deg, #FF00FF, #00FFFF, #FFAA00, #AAFF00)`;
+      }
+
+      // Detect if on mobile to enable device orientation
       if (window.DeviceOrientationEvent) {
         window.addEventListener("deviceorientation", (event) => {
-          // Capture device tilt angles
-          const { beta, gamma } = event;
-
-          // Map beta and gamma values to x, y positions for gradient
-          // Constrain to a reasonable range for better control over the effect
-          const x = Math.min(Math.max(gamma, -30), 30); // left-right tilt
-          const y = Math.min(Math.max(beta, -30), 30); // front-back tilt
-
-          // Convert to percentages to set gradient position
-          const xPercent = 50 + (x / 30) * 50;
-          const yPercent = 50 + (y / 30) * 50;
-
-          // Apply gradient position based on device tilt
-          document.querySelector(
-            ".circle"
-          ).style.backgroundPosition = `${xPercent}% ${yPercent}%`;
+          const { beta, gamma } = event; // tilt front/back and left/right
+          if (beta !== null && gamma !== null) {
+            updateGradient(gamma, beta);
+          }
         });
-      } else {
-        console.log("Device orientation is not supported on this device.");
       }
     </script>
   </body>

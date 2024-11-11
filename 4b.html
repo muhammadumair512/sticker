@@ -3,60 +3,60 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>CSS Blend Mode Shader</title>
+    <title>Gyro Gradient Circle</title>
     <style>
-      body {
+      /* Root element for size customization */
+      :root {
+        --circle-size: 200px; /* Adjust the size of the circle */
+      }
+
+      /* Circle container */
+      .circle {
+        width: var(--circle-size);
+        height: var(--circle-size);
+        border-radius: 50%;
+        background: radial-gradient(circle, #ff00ff, #00ffff, #ff0000);
+        transition: background-position 0.1s ease;
+      }
+
+      /* Centering the circle in the view */
+      .container {
         display: flex;
-        justify-content: center;
         align-items: center;
+        justify-content: center;
         height: 100vh;
-        margin: 0;
-        background-color: black; /* white background */
-      }
-
-      .image-container {
-        position: relative;
-        display: inline-block;
-      }
-
-      .image-container img {
-        width: 800px;
-        height: auto;
-        filter: brightness(0.8) contrast(1.2);
-        mix-blend-mode: screen;
-        transition: all 0.3s ease-in-out;
-      }
-
-      .image-container:hover img {
-        filter: brightness(1) contrast(1.5);
-      }
-
-      .shader {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(
-          135deg,
-          rgba(255, 0, 255, 0.3),
-          rgba(0, 255, 255, 0.3)
-        );
-        background-size: 4DDDZDFFG
-      @keyframes moveGradient {
-        0% {
-          background-position: 0% 0%;
-        }
-        100% {
-          background-position: 100% 100%;
-        }
       }
     </style>
   </head>
   <body>
-    <div class="image-container">
-      <img src="./1-1.png" alt="Holographic Image" />
-      <div class="shader"></div>
+    <div class="container">
+      <div class="circle"></div>
     </div>
+
+    <script>
+      // Check if the device orientation is supported
+      if (window.DeviceOrientationEvent) {
+        window.addEventListener("deviceorientation", (event) => {
+          // Capture device tilt angles
+          const { beta, gamma } = event;
+
+          // Map beta and gamma values to x, y positions for gradient
+          // Constrain to a reasonable range for better control over the effect
+          const x = Math.min(Math.max(gamma, -30), 30); // left-right tilt
+          const y = Math.min(Math.max(beta, -30), 30); // front-back tilt
+
+          // Convert to percentages to set gradient position
+          const xPercent = 50 + (x / 30) * 50;
+          const yPercent = 50 + (y / 30) * 50;
+
+          // Apply gradient position based on device tilt
+          document.querySelector(
+            ".circle"
+          ).style.backgroundPosition = `${xPercent}% ${yPercent}%`;
+        });
+      } else {
+        console.log("Device orientation is not supported on this device.");
+      }
+    </script>
   </body>
 </html>
