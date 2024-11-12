@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Marquee Text Inside Circle</title>
+    <style>
+      /* Circle container styling */
+      .circle-container {
+        position: absolute;
+        width: 200px;
+        height: 200px;
+        border-radius: 50%;
+        background-color: lightgray;
+        overflow: hidden;
+        margin: 50px auto;
+      }
+
+      /* Common styling for marquee texts */
+      .marquee-text {
+        position: relative;
+        font-size: 18px;
+        white-space: nowrap;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="circle-container">
+      <!-- Text elements with individual animations for unique paths and delays -->
+      <div class="marquee-text text1">12345678</div>
+      <div class="marquee-text text2">12345678</div>
+      <div class="marquee-text text3">12345678</div>
+      <div class="marquee-text text4">12345678</div>
+      <div class="marquee-text text5">12345678</div>
+    </div>
+
+    <script>
+      function calculatePosition(degree, radius) {
+        const radians = (degree - 90) * (Math.PI / 180);
+        return {
+          x: radius * Math.cos(radians),
+          y: radius * Math.sin(radians),
+        };
+      }
+
+      function moveText(element, startDegree, endDegree, duration) {
+        const radius = 200; // Radius of the circle-container
+        const startPos = calculatePosition(startDegree, radius);
+        const endPos = calculatePosition(endDegree, radius);
+        const keyframes = [
+          { transform: `translate(${startPos.x}px, ${startPos.y}px)` },
+          { transform: `translate(${endPos.x}px, ${endPos.y}px)` },
+        ];
+        element.animate(keyframes, {
+          duration: duration,
+          iterations: Infinity,
+          easing: "linear",
+        });
+      }
+
+      document.addEventListener("DOMContentLoaded", () => {
+        moveText(document.querySelector(".text1"), 210, 150, 5000);
+        moveText(document.querySelector(".text2"), 120, 240, 5000);
+        moveText(document.querySelector(".text3"), 270, 90, 5000);
+        moveText(document.querySelector(".text4"), 60, 300, 5000);
+        moveText(document.querySelector(".text5"), 330, 30, 5000);
+      });
+    </script>
+  </body>
+</html>
