@@ -47,21 +47,12 @@ function startMotionDetection() {
     const blue = Math.abs(Math.sin(((angle + 90) * Math.PI) / 180) * 255); // Another sine for blue
 
     // Update gradient stop colors based on tilt
-    gradient.children[0].setAttribute(
-      "style",
-      `stop-color: rgba(${red}, 0, 0, 1);`
-    ); // Red stop
-    gradient.children[1].setAttribute(
-      "style",
-      `stop-color: rgba(${255 - red}, ${green}, 0, 1);`
-    ); // Orange-Yellow stop
-    gradient.children[2].setAttribute(
-      "style",
-      `stop-color: rgba(255, ${green}, 0, 1);`
-    ); // Yellow stop
+    gradient.children[0].setAttribute("style", `stop-color: red;`); // Red stop
+    gradient.children[1].setAttribute("style", `stop-color: green;`); // Orange-Yellow stop
+    gradient.children[2].setAttribute("style", `stop-color: blue;`); // Yellow stop
     gradient.children[3].setAttribute(
       "style",
-      `stop-color: rgba(0, ${green}, ${blue}, 1);`
+      `stop-color: rgba(0, ${green}, ${blue}, 0.8);`
     ); // Green stop
     gradient.children[4].setAttribute(
       "style",
