@@ -19,8 +19,10 @@
       /* Common styling for marquee texts */
       .marquee-text {
         position: relative;
-        font-size: 18px;
+        font-size: 23px;
+        font-weight: 400;
         white-space: nowrap;
+        color: rgba(18, 1, 1, 0.206);
       }
     </style>
   </head>
@@ -36,7 +38,7 @@
 
     <script>
       function calculatePosition(degree, radius) {
-        const radians = (degree - 90) * (Math.PI / 180);
+        const radians = (degree - 60) * (Math.PI / 180);
         return {
           x: radius * Math.cos(radians),
           y: radius * Math.sin(radians),
@@ -48,8 +50,12 @@
         const startPos = calculatePosition(startDegree, radius);
         const endPos = calculatePosition(endDegree, radius);
         const keyframes = [
-          { transform: `translate(${startPos.x}px, ${startPos.y}px)` },
-          { transform: `translate(${endPos.x}px, ${endPos.y}px)` },
+          {
+            transform: `translate(${startPos.x}px, ${startPos.y}px) rotate(30deg)`,
+          },
+          {
+            transform: `translate(${endPos.x}px, ${endPos.y}px) rotate(30deg)`,
+          },
         ];
         element.animate(keyframes, {
           duration: duration,
@@ -59,11 +65,11 @@
       }
 
       document.addEventListener("DOMContentLoaded", () => {
-        moveText(document.querySelector(".text1"), 210, 150, 5000);
-        moveText(document.querySelector(".text2"), 120, 240, 5000);
-        moveText(document.querySelector(".text3"), 270, 90, 5000);
-        moveText(document.querySelector(".text4"), 60, 300, 5000);
-        moveText(document.querySelector(".text5"), 330, 30, 5000);
+        moveText(document.querySelector(".text1"), 215, 145, 5000);
+        moveText(document.querySelector(".text2"), 125, 235, 5000);
+        moveText(document.querySelector(".text3"), 245, 100, 5000);
+        moveText(document.querySelector(".text4"), 80, 260, 5000);
+        moveText(document.querySelector(".text5"), 280, 60, 5000);
       });
     </script>
   </body>
