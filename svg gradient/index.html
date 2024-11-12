@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SVG Gradient Tilt Effect</title>
+    <style>
+      body {
+        margin: 0;
+        overflow: hidden;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color: #f0f0f0;
+      }
+
+      svg {
+        width: 80%;
+        height: 80%;
+        max-width: 600px;
+        max-height: 600px;
+        display: block;
+        border: 2px solid #ccc;
+      }
+
+      .line {
+        stroke-width: 4;
+      }
+    </style>
+  </head>
+  <body>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500">
+      <!-- Gradient Definition -->
+      <defs>
+        <linearGradient id="gradient1" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop
+            offset="0%"
+            style="stop-color: rgba(255, 154, 158, 0.7); stop-opacity: 1"
+          />
+          <stop
+            offset="100%"
+            style="stop-color: rgba(146, 169, 255, 0.7); stop-opacity: 1"
+          />
+        </linearGradient>
+      </defs>
+
+      <!-- Two Horizontal Lines -->
+      <line
+        id="line1"
+        x1="50"
+        y1="100"
+        x2="450"
+        y2="100"
+        class="line"
+        stroke="url(#gradient1)"
+      />
+      <line
+        id="line2"
+        x1="50"
+        y1="300"
+        x2="450"
+        y2="300"
+        class="line"
+        stroke="url(#gradient1)"
+      />
+    </svg>
+
+    <script>
+      // Get references to the lines in the SVG
+      const line1 = document.getElementById("line1");
+      const line2 = document.getElementById("line2");
+
+      // Function to update the gradient angle based on device tilt
+      function updateGradient(event) {
+        // Get the device's orientation
+        const tiltX = event.beta; // Tilt on the X-axis (front-back)
+        const tiltY = event.gamma; // Tilt on the Y-axis (left-right)
+
+        // Ensure values are within the range to avoid extreme rotations
+        const angleX = Math.min(Math.max(tiltX, -45), 45);
+        const angleY = Math.min(Math.max(tiltY, -45), 45);
+
+        // Set the gradient angle based on the device tilt
+        const gradientAngle = `rotate(${angleX}deg, ${angleY}deg)`;
+
+        // Apply the updated gradient angle to the lines
+        line1.style.stroke = `url(#gradient1)`;
+        line2.style.stroke = `url(#gradient1)`;
+        // Apply the rotation transformation to simulate tilt effect
+        line1.style.transform = `rotate(${angleX}deg)`;
+        line2.style.transform = `rotate(${angleY}deg)`;
+      }
+
+      // Listen for device orientation events
+      window.addEventListener("deviceorientation", updateGradient, true);
+    </script>
+  </body>
+</html>

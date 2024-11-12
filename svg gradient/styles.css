@@ -1,0 +1,30 @@
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  margin: 0;
+  background-color: #222;
+}
+
+.svg-container {
+  position: relative;
+}
+
+#mySvg {
+  width: 200px;
+  height: 200px;
+  display: block;
+}
+
+#request-permission {
+  position: absolute;
+  top: 10%;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+}
