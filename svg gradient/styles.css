@@ -1,3 +1,17 @@
+#containerAll {
+  position: relative;
+  top: 0;
+  left: 0;
+}
+.containerSvg {
+  position: absolute;
+  z-index: -10;
+  top: 0;
+  left: 0;
+}
+.logo {
+  position: absolute;
+}
 /* Apply styles for the SVG container */
 .gradient-circle {
   width: 100%;
@@ -17,6 +31,7 @@ svg {
 /* The request-permission button for iOS */
 #request-permission {
   position: absolute;
+  z-index: -20;
   top: 10px;
   left: 10px;
   background: rgba(0, 0, 0, 0.7);
@@ -25,4 +40,28 @@ svg {
   padding: 10px;
   font-size: 14px;
   display: block;
+}
+
+/* diagonal text move */
+/* Circle container styling */
+.circle-container {
+  position: absolute;
+  z-index: -20;
+  width: 300px;
+  top: 0;
+  left: 0;
+  height: 300px;
+  border-radius: 50%;
+  background-color: lightgray;
+  overflow: hidden;
+  /* margin: 50px auto; */
+}
+
+/* Common styling for marquee texts */
+.marquee-text {
+  position: relative;
+  font-size: 23px;
+  font-weight: 400;
+  white-space: nowrap;
+  color: rgba(18, 1, 1, 0.206);
 }
