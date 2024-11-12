@@ -40,9 +40,32 @@ function startMotionDetection() {
 
     // Update the gradient direction dynamically on the path element
     const gradient = document.querySelector("#gradient1");
-    gradient.setAttribute("x1", `${angle}%`);
-    gradient.setAttribute("y1", `${100 - angle}%`);
-    gradient.setAttribute("x2", `${100 - angle}%`);
-    gradient.setAttribute("y2", `${angle}%`);
+
+    // Create dynamic color changes based on angle for the gradient stops
+    const red = Math.abs(Math.sin((angle * Math.PI) / 180) * 255); // Sine function to create dynamic color effect
+    const green = Math.abs(Math.cos((angle * Math.PI) / 180) * 255); // Cosine function for green
+    const blue = Math.abs(Math.sin(((angle + 90) * Math.PI) / 180) * 255); // Another sine for blue
+
+    // Update gradient stop colors based on tilt
+    gradient.children[0].setAttribute(
+      "style",
+      `stop-color: rgba(${red}, 0, 0, 1);`
+    ); // Red stop
+    gradient.children[1].setAttribute(
+      "style",
+      `stop-color: rgba(${255 - red}, ${green}, 0, 1);`
+    ); // Orange-Yellow stop
+    gradient.children[2].setAttribute(
+      "style",
+      `stop-color: rgba(255, ${green}, 0, 1);`
+    ); // Yellow stop
+    gradient.children[3].setAttribute(
+      "style",
+      `stop-color: rgba(0, ${green}, ${blue}, 1);`
+    ); // Green stop
+    gradient.children[4].setAttribute(
+      "style",
+      `stop-color: rgba(0, 0, ${blue}, 1);`
+    ); // Blue stop
   });
 }
