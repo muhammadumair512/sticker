@@ -128,7 +128,7 @@ function moveText(element, startDegree, endDegree, duration) {
 document.addEventListener("DOMContentLoaded", () => {
   moveText(document.querySelector(".text1"), 215, 145, 10000);
   moveText(document.querySelector(".text2"), 125, 235, 10000);
-  moveText(document.querySelector(".text3"), 245, 100, 10000);
-  moveText(document.querySelector(".text4"), 80, 260, 10000);
-  moveText(document.querySelector(".text5"), 280, 60, 10000);
+  moveText(document.querySelector(".text3"), 255, 105, 10000);
+  moveText(document.querySelector(".text4"), 85, 270, 10000);
+  moveText(document.querySelector(".text5"), 290, 70, 10000);
 });

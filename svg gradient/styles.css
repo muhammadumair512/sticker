@@ -60,8 +60,10 @@ svg {
 /* Common styling for marquee texts */
 .marquee-text {
   position: relative;
-  font-size: 23px;
-  font-weight: 400;
+  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+  font-size: 26px;
+
+  font-weight: 500;
   white-space: nowrap;
   color: rgba(18, 1, 1, 0.206);
 }
