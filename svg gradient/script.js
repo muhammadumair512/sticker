@@ -1,42 +1,26 @@
-// Check for iOS-specific permission for motion events
-// Directly check and request motion permission for iOS without showing a button
-if (window.DeviceOrientationEvent) {
-  // Check if explicit permission request is needed (iOS 13+)
-  if (typeof DeviceOrientationEvent.requestPermission === "function") {
-    // Attempt to request permission immediately without showing a button
-    DeviceOrientationEvent.requestPermission()
-      .then((response) => {
-        if (response === "granted") {
-          DeviceMotionEvent.requestPermission()
-            .then((motionResponse) => {
-              if (motionResponse === "granted") {
-                startMotionDetection(); // Start detection if both permissions are granted
-              } else {
-                alert("Motion permission denied.");
-              }
-            })
-            .catch(console.error);
-        } else {
-          alert("Orientation permission denied.");
-        }
-      })
-      .catch(console.error);
-  } else {
-    // For devices that don't require explicit permission, start detection directly
-    startMotionDetection();
-  }
+if (typeof DeviceMotionEvent.requestPermission === "function") {
+  // For iOS 13+ devices, request permission to access motion data
+  DeviceMotionEvent.requestPermission()
+    .then((response) => {
+      if (response === "granted") {
+        startHolographicStickerEffect();
+      } else {
+        alert("Permission to access motion data was denied.");
+      }
+    })
+    .catch(console.error);
 } else {
-  alert("Device orientation events are not supported on this device.");
+  // Non-iOS devices that don't require explicit permission
+  startHolographicStickerEffect();
 }
 
-// Function to start motion detection and update gradient
-function startMotionDetection() {
+function startMotionHandler(onMotionUpdate) {
   const isMacSafari =
     /^((?!chrome|android).)*safari/i.test(navigator.userAgent) &&
     navigator.platform.toUpperCase().indexOf("MAC") >= 0;
 
   if (isMacSafari) {
-    // Simulate oscillation effect for Mac Safari without motion sensors
+    // Simulate oscillation effect for Mac Safari
     let xPosition = 0;
     let yPosition = 0;
     let stepX = 0.1;
@@ -47,56 +31,66 @@ function startMotionDetection() {
       yPosition += stepY;
 
       // Reverse direction at boundaries
-      if (xPosition >= 5 || xPosition <= -5) stepX = -stepX;
-      if (yPosition >= 5 || yPosition <= -5) stepY = -stepY;
-
-      updateGradient(xPosition, yPosition);
-    }, 100);
-  } else {
-    // Use actual motion data on devices with sensors
-    window.addEventListener("deviceorientation", (event) => {
-      const gamma = event.gamma || 0;
-      const beta = event.beta || 0;
-
-      // Only update if within bounds
-      if (gamma >= -90 && gamma <= 90 && beta >= -180 && beta <= 180) {
-        updateGradient(gamma, beta);
+      if (xPosition >= 5 || xPosition <= -5) {
+        stepX = -stepX;
       }
+      if (yPosition >= 5 || yPosition <= -5) {
+        stepY = -stepY;
+      }
+
+      // Call the update function with simulated values
+      onMotionUpdate(xPosition, yPosition);
+    }, 10);
+  } else if (window.DeviceOrientationEvent) {
+    // Apply motion effect for devices with motion sensors
+    window.addEventListener("deviceorientation", function (event) {
+      let gamma = event.gamma || 0;
+      let beta = event.beta || 0;
+
+      // Call the update function with actual motion values
+      onMotionUpdate(gamma * mult_gamme, beta * mult_beta);
     });
+  } else {
+    alert("Device orientation not supported on this device/browser.");
   }
 }
 
-// Function to calculate and update the gradient dynamically
-function updateGradient(gamma, beta) {
-  const angle = ((gamma + 90) / 180) * 360; // Normalize gamma to range from 0 to 360
+function startHolographicStickerEffect() {
+  const holographicSticker = document.querySelector("#gradient1");
+  // const stickerText = holographicSticker.querySelector(".stickerText");
 
-  // Calculate RGB values based on angle for a dynamic color effect
-  const red = Math.abs(Math.sin((angle * Math.PI) / 180) * 255);
-  const green = Math.abs(Math.cos((angle * Math.PI) / 180) * 255);
-  const blue = Math.abs(Math.sin(((angle + 90) * Math.PI) / 180) * 255);
+  startMotionHandler((x, y) => {
+    const updated_x = Math.abs(x * 1);
+    const updated_y = y * 1;
 
-  // Update gradient stop colors based on tilt values
-  const gradient = document.querySelector("#gradient1");
-  gradient.children[0].setAttribute(
-    "style",
-    `stop-color: rgba(${red}, 0, 0, 1);`
-  );
-  gradient.children[1].setAttribute(
-    "style",
-    `stop-color: rgba(255, ${green}, 0, 1);`
-  );
-  gradient.children[2].setAttribute(
-    "style",
-    `stop-color: rgba(255, 255, ${blue}, 1);`
-  );
-  gradient.children[3].setAttribute(
-    "style",
-    `stop-color: rgba(0, ${green}, ${blue}, 0.8);`
-  );
-  gradient.children[4].setAttribute(
-    "style",
-    `stop-color: rgba(0, 0, ${blue}, 1);`
-  );
+    const angle = Math.atan2(updated_y, updated_x) * (180 / Math.PI);
+
+    // Dynamically update the linear gradient angle
+    holographicSticker.style.background = `radial-gradient(circle at 50% 50%,
+            rgba(255, 255, 255, 0.5) 0%,
+            rgba(255, 255, 255, 0.3) 25%,
+            rgba(255, 255, 255, 0.1) 50%,
+            rgba(255, 255, 255, 0) 75%) 50% 50%,
+          radial-gradient(circle at 50% 50%,
+            rgba(240, 230, 140, 0.3) 0%,
+            rgba(250, 250, 210, 0.2) 30%,
+            rgba(240, 230, 140, 0) 70%) 50% 50%,
+          linear-gradient(${angle}deg, rgba(255, 154, 158, 0.7), rgba(250, 208, 196, 0.7), rgba(212, 252, 121, 0.7), rgba(150, 230, 161, 0.7), rgba(146, 169, 255, 0.7), rgba(255, 154, 158, 0.7))`;
+
+    const colorShiftFactor = updated_x;
+    const color1 = `hsl(${200 + colorShiftFactor * colorMultiplier}, 80%, 60%)`;
+    const color2 = `hsl(${340 + colorShiftFactor * colorMultiplier}, 80%, 60%)`;
+
+    // Apply a gradient text color effect to simulate a shifting holographic text
+    stickerText.style.background = `linear-gradient(${angle}deg, ${color1}, ${color2})`;
+    stickerText.style.webkitBackgroundClip = "text";
+    stickerText.style.webkitTextFillColor = "transparent";
+
+    // Log the current x and y values to the console for debugging
+    console.log(
+      `Holographic Sticker - X: ${updated_x}, Y: ${updated_y}, Color 1: ${color1}, Color 2: ${color2}`
+    );
+  });
 }
 
 // script for diagonal text move
