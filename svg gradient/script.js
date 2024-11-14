@@ -38,6 +38,7 @@ function initializeMotionAccess() {
       .then((response) => {
         if (response === "granted") {
           startGradientEffect();
+          alert("Permission to access motion data was provided.");
         } else {
           alert("Permission to access motion data was denied.");
         }
