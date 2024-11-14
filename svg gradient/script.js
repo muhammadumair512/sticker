@@ -46,6 +46,7 @@ function initializeMotionAccess() {
   } else {
     // Non-iOS devices or browsers that don’t require explicit permission
     startGradientEffect();
+    alert("Permission to access motion data was provided.");
   }
 }
 
