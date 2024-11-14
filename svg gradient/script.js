@@ -91,6 +91,7 @@ function startMotionHandler(onMotionUpdate) {
 
 // Start gradient effect and set up motion detection
 function startGradientEffect() {
+  alert("motion handler started");
   const gradientElement = document.querySelector("#gradient1");
 
   // Start motion handling to dynamically update gradient
