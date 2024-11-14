@@ -21,13 +21,56 @@ function initializeMotionAccess() {
   }
 }
 
+function startMotionHandler(onMotionUpdate) {
+  const isMacSafari =
+    /^((?!chrome|android).)*safari/i.test(navigator.userAgent) &&
+    navigator.platform.toUpperCase().indexOf("MAC") >= 0;
+
+  if (isMacSafari) {
+    // Simulate oscillation effect for Mac Safari without motion sensors
+    let xPosition = 0;
+    let yPosition = 0;
+    let stepX = 0.1;
+    let stepY = 0.1;
+
+    setInterval(() => {
+      xPosition += stepX;
+      yPosition += stepY;
+
+      if (xPosition >= 5 || xPosition <= -5) stepX = -stepX;
+      if (yPosition >= 5 || yPosition <= -5) stepY = -stepY;
+      // Call the update function with simulated values
+      onMotionUpdate(xPosition, yPosition);
+    }, 10);
+  } else if (window.DeviceOrientationEvent) {
+    // For devices with motion sensors, listen for orientation events
+    window.addEventListener("deviceorientation", (event) => {
+      // let gamma = (event.gamma || 0) * multGamma;
+      // let beta = (event.beta || 0) * multBeta;
+
+      let gamma = event.gamma || 0;
+      let beta = event.beta || 0;
+      // Call the update function with actual motion values
+      onMotionUpdate(gamma, beta);
+      // onMotionUpdate(gamma * mult_gamme, beta * mult_beta);
+    });
+  } else {
+    alert("Device orientation not supported on this device/browser.");
+  }
+}
+
 // Start gradient effect and set up motion detection
 function startGradientEffect() {
   const gradientElement = document.querySelector("#gradient1");
 
   // Start motion handling to dynamically update gradient
-  startMotionHandler((gamma, beta) => {
-    const angle = ((gamma + 90) / 180) * 360; // Normalize gamma to range from 0 to 360
+  // startMotionHandler((gamma, beta) => {
+  //   const angle = ((gamma + 90) / 180) * 360; // Normalize gamma to range from 0 to 360
+  //updated
+  startMotionHandler((x, y) => {
+    const updated_x = Math.abs(x * 1);
+    const updated_y = y * 1;
+    const angle = Math.atan2(updated_y, updated_x) * (180 / Math.PI);
 
     // Calculate RGB values based on angle for dynamic color effect
     const red = Math.abs(Math.sin((angle * Math.PI) / 180) * 255);
@@ -57,41 +100,9 @@ function startGradientEffect() {
     );
   });
 }
+//update
 
 // Motion handler to apply real or simulated values depending on device/browser
-function startMotionHandler(onMotionUpdate) {
-  const isMacSafari =
-    /^((?!chrome|android).)*safari/i.test(navigator.userAgent) &&
-    navigator.platform.toUpperCase().indexOf("MAC") >= 0;
-
-  if (isMacSafari) {
-    // Simulate oscillation effect for Mac Safari without motion sensors
-    let xPosition = 0;
-    let yPosition = 0;
-    let stepX = 0.1;
-    let stepY = 0.1;
-
-    setInterval(() => {
-      xPosition += stepX;
-      yPosition += stepY;
-
-      if (xPosition >= 5 || xPosition <= -5) stepX = -stepX;
-      if (yPosition >= 5 || yPosition <= -5) stepY = -stepY;
-
-      onMotionUpdate(xPosition, yPosition);
-    }, 10);
-  } else if (window.DeviceOrientationEvent) {
-    // For devices with motion sensors, listen for orientation events
-    window.addEventListener("deviceorientation", (event) => {
-      const gamma = (event.gamma || 0) * multGamma;
-      const beta = (event.beta || 0) * multBeta;
-
-      onMotionUpdate(gamma, beta);
-    });
-  } else {
-    alert("Device orientation not supported on this device/browser.");
-  }
-}
 
 // Initialize motion access for iOS or start directly on other devices
 initializeMotionAccess();
