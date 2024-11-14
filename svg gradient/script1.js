@@ -138,7 +138,7 @@ function startGradientEffect() {
 // Motion handler to apply real or simulated values depending on device/browser
 
 // Initialize motion access for iOS or start directly on other devices
-// initializeMotionAccess();
+initializeMotionAccess();
 
 // script for diagonal text move
 
