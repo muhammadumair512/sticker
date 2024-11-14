@@ -52,6 +52,7 @@ function initializeMotionAccess() {
 }
 
 function startMotionHandler(onMotionUpdate) {
+  alert("motion handler started for mac / safari");
   const isMacSafari =
     /^((?!chrome|android).)*safari/i.test(navigator.userAgent) &&
     navigator.platform.toUpperCase().indexOf("MAC") >= 0;
