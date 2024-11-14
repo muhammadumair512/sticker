@@ -1,31 +1,3 @@
-const gradientElement = document.querySelector("#gradient1");
-
-// Define RGB values for each color
-const red = 228;
-const green = 235;
-const blue = 229;
-
-gradientElement.children[0].setAttribute(
-  "style",
-  `stop-color: rgba(${red}, 14, 14, 0.9);`
-);
-gradientElement.children[1].setAttribute(
-  "style",
-  `stop-color: rgba(9, ${green}, 156, 0.9);`
-);
-gradientElement.children[2].setAttribute(
-  "style",
-  `stop-color: rgba(32, 18, ${blue}, 0.9);`
-);
-gradientElement.children[3].setAttribute(
-  "style",
-  `stop-color: rgba(192, 168, 168, 0.9);`
-);
-gradientElement.children[4].setAttribute(
-  "style",
-  `stop-color: rgba(6, 54, 5, 0.9);`
-);
-
 const multGamma = 1.0;
 const multBeta = 0.7;
 const colorMultiplier = 3;
