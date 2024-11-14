@@ -107,6 +107,8 @@ function startGradientEffect() {
     const red = Math.abs(Math.sin((angle * Math.PI) / 180) * 255);
     const green = Math.abs(Math.cos((angle * Math.PI) / 180) * 255);
     const blue = Math.abs(Math.sin(((angle + 90) * Math.PI) / 180) * 255);
+    alert(`angle is angle ${angle}`);
+    // console.log(green);
     // Update gradient stop colors based on tilt values
     gradientElement.children[0].setAttribute(
       "style",
