@@ -1,65 +1,116 @@
-// Check for iOS-specific permission for motion events
-if (window.DeviceOrientationEvent) {
-  const requestPermissionButton = document.getElementById("request-permission");
+const gradientElement = document.querySelector("#gradient1");
 
-  // iOS 13+ requires permission to access motion events
-  if (typeof DeviceOrientationEvent.requestPermission === "function") {
-    requestPermissionButton.style.display = "block";
-    requestPermissionButton.addEventListener("click", () => {
-      DeviceOrientationEvent.requestPermission()
-        .then((response) => {
-          if (response === "granted") {
-            startMotionDetection();
-            requestPermissionButton.style.display = "none"; // Hide button after permission is granted
-          } else {
-            alert("Permission denied");
-          }
-        })
-        .catch(console.error);
+const red = 228;
+const green = 235;
+const blue = 229;
+
+gradientElement.children[0].setAttribute(
+  "style",
+  `stop-color: rgba(${red}, 14, 14, 0.9);`
+);
+gradientElement.children[1].setAttribute(
+  "style",
+  `stop-color: rgba(9, ${green}, 156, 0.9);`
+);
+gradientElement.children[2].setAttribute(
+  "style",
+  `stop-color: rgba(32, 18, ${blue}, 0.9);`
+);
+gradientElement.children[3].setAttribute(
+  "style",
+  `stop-color: rgba(192, 168, 168, 0.9);`
+);
+gradientElement.children[4].setAttribute(
+  "style",
+  `stop-color: rgba(6, 54, 5, 0.9);`
+);
+
+const multGamma = 1.0;
+const multBeta = 0.7;
+const colorMultiplier = 3;
+
+function initializeMotionAccess() {
+  const circle = document.querySelector(".overlay");
+  circle.style.display = "none";
+  if (typeof DeviceMotionEvent.requestPermission === "function") {
+    DeviceMotionEvent.requestPermission()
+      .then((response) => {
+        if (response === "granted") {
+          startGradientEffect();
+        } else {
+          alert("Permission to access motion data was denied.");
+        }
+      })
+      .catch(console.error);
+  } else {
+    startGradientEffect();
+  }
+}
+
+function startMotionHandler(onMotionUpdate) {
+  const isMacSafari =
+    /^((?!chrome|android).)*safari/i.test(navigator.userAgent) &&
+    navigator.platform.toUpperCase().indexOf("MAC") >= 0;
+
+  if (isMacSafari) {
+    let xPosition = 0;
+    let yPosition = 0;
+    let stepX = 0.1;
+    let stepY = 0.1;
+
+    setInterval(() => {
+      xPosition += stepX;
+      yPosition += stepY;
+
+      if (xPosition >= 5 || xPosition <= -5) stepX = -stepX;
+      if (yPosition >= 5 || yPosition <= -5) stepY = -stepY;
+      onMotionUpdate(xPosition, yPosition);
+    }, 10);
+  } else if (window.DeviceOrientationEvent) {
+    window.addEventListener("deviceorientation", (event) => {
+      let gamma = event.gamma || 0;
+      let beta = event.beta || 0;
+      onMotionUpdate(gamma, beta);
     });
   } else {
-    // For other devices, start motion detection directly
-    startMotionDetection();
+    alert("Device orientation not supported on this device/browser.");
   }
-} else {
-  alert("Device orientation events are not supported on this device");
 }
 
-// Function to handle motion detection and update gradient direction
-function startMotionDetection() {
-  // Listen for device orientation events
-  window.addEventListener("deviceorientation", function (event) {
-    const gamma = event.gamma; // Left-to-right tilt (between -90 and 90)
-    const beta = event.beta; // Front-to-back tilt (between -180 and 180)
+function startGradientEffect() {
+  const gradientElement = document.querySelector("#gradient1");
 
-    // If the tilt values are out of bounds, skip the update
-    if (gamma < -90 || gamma > 90 || beta < -180 || beta > 180) return;
+  startMotionHandler((x, y) => {
+    const updated_x = Math.abs(x * 1);
+    const updated_y = y * 1;
+    const angle = Math.atan2(updated_y, updated_x) * (180 / Math.PI);
 
-    // Calculate the gradient angle based on gamma and beta
-    const angle = ((gamma + 90) / 180) * 360; // Normalize gamma to range from 0 to 360
-
-    // Update the gradient direction dynamically on the path element
-    const gradient = document.querySelector("#gradient1");
-
-    // Create dynamic color changes based on angle for the gradient stops
-    const red = Math.abs(Math.sin((angle * Math.PI) / 180) * 255); // Sine function to create dynamic color effect
-    const green = Math.abs(Math.cos((angle * Math.PI) / 180) * 255); // Cosine function for green
-    const blue = Math.abs(Math.sin(((angle + 90) * Math.PI) / 180) * 255); // Another sine for blue
-
-    // Update gradient stop colors based on tilt
-    gradient.children[0].setAttribute("style", `stop-color: red;`); // Red stop
-    gradient.children[1].setAttribute("style", `stop-color: green;`); // Orange-Yellow stop
-    gradient.children[2].setAttribute("style", `stop-color: blue;`); // Yellow stop
-    gradient.children[3].setAttribute(
+    const red = Math.abs(Math.sin((angle * Math.PI) / 180) * 255);
+    const green = Math.abs(Math.cos((angle * Math.PI) / 180) * 255);
+    const blue = Math.abs(Math.sin(((angle + 90) * Math.PI) / 180) * 255);
+    gradientElement.children[0].setAttribute(
+      "style",
+      `stop-color: rgba(${red}, 0, 0, 0.9);`
+    );
+    gradientElement.children[1].setAttribute(
+      "style",
+      `stop-color: rgba(255, 0, 0.9, ${green});`
+    );
+    gradientElement.children[2].setAttribute(
+      "style",
+      `stop-color: rgba(${red}, 255, ${blue}, 1);`
+    );
+    gradientElement.children[3].setAttribute(
       "style",
       `stop-color: rgba(0, ${green}, ${blue}, 0.8);`
-    ); // Green stop
-    gradient.children[4].setAttribute(
+    );
+    gradientElement.children[4].setAttribute(
       "style",
-      `stop-color: rgba(0, 0, ${blue}, 1);`
-    ); // Blue stop
+      `stop-color: rgba(0, 0, ${blue}, 0.9);`
+    );
   });
 }
+
 // script for diagonal text move
 
 function calculatePosition(degree, radius) {

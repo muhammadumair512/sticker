@@ -1,6 +1,5 @@
 const gradientElement = document.querySelector("#gradient1");
 
-// Define RGB values for each color
 const red = 228;
 const green = 235;
 const blue = 229;
@@ -30,7 +29,6 @@ const multGamma = 1.0;
 const multBeta = 0.7;
 const colorMultiplier = 3;
 
-// Automatically request motion access for iOS without displaying a button
 function initializeMotionAccess() {
   if (typeof DeviceMotionEvent.requestPermission === "function") {
     // For iOS 13+ devices, request permission to access motion data
@@ -45,7 +43,6 @@ function initializeMotionAccess() {
       })
       .catch(console.error);
   } else {
-    // Non-iOS devices or browsers that don’t require explicit permission
     startGradientEffect();
     alert("Permission to access motion data was provided.");
   }
@@ -90,7 +87,6 @@ function startMotionHandler(onMotionUpdate) {
   }
 }
 
-// Start gradient effect and set up motion detection
 function startGradientEffect() {
   alert("motion handler started");
   const gradientElement = document.querySelector("#gradient1");
@@ -113,7 +109,7 @@ function startGradientEffect() {
     // Update gradient stop colors based on tilt values
     gradientElement.children[0].setAttribute(
       "style",
-      `stop-color: rgba(${red}, 0, 0, 1);`
+      `stop-color: rgba(${red}, ${blue}, 0, 1);`
     );
     gradientElement.children[1].setAttribute(
       "style",
@@ -133,14 +129,6 @@ function startGradientEffect() {
     );
   });
 }
-//update
-
-// Motion handler to apply real or simulated values depending on device/browser
-
-// Initialize motion access for iOS or start directly on other devices
-initializeMotionAccess();
-
-// script for diagonal text move
 
 function calculatePosition(degree, radius) {
   const radians = (degree - 60) * (Math.PI / 180);
