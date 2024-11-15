@@ -80,35 +80,57 @@ function startMotionHandler(onMotionUpdate) {
 function startGradientEffect() {
   const gradientElement = document.querySelector("#gradient1");
 
+  // Start the motion handler
   startMotionHandler((x, y) => {
-    const updated_x = Math.abs(x * 1);
-    const updated_y = y * 1;
-    const angle = Math.atan2(updated_y, updated_x) * (180 / Math.PI);
+    // Normalize and scale tilt values
+    const normalizedX = x / 90; // Normalize x tilt to range [-1, 1]
+    const normalizedY = y / 90; // Normalize y tilt to range [-1, 1]
+    const angle = Math.atan2(normalizedY, normalizedX) * (180 / Math.PI);
 
-    const red = Math.abs(Math.sin((angle * Math.PI) / 180) * 255);
-    const green = Math.abs(Math.cos((angle * Math.PI) / 180) * 255);
-    const blue = Math.abs(Math.sin(((angle + 90) * Math.PI) / 180) * 255);
+    // Calculate RGB values for dynamic gradients
+    const red1 = Math.abs(Math.sin((angle * Math.PI) / 180) * 255);
+    const green1 = Math.abs(Math.cos((angle * Math.PI) / 180) * 255);
+    const blue1 = Math.abs(Math.sin(((angle + 90) * Math.PI) / 180) * 255);
 
+    const red2 = Math.abs(Math.cos(((angle + 45) * Math.PI) / 180) * 255);
+    const green2 = Math.abs(Math.sin(((angle + 45) * Math.PI) / 180) * 255);
+    const blue2 = Math.abs(Math.cos(((angle + 90) * Math.PI) / 180) * 255);
+
+    // Adjust offsets to create a "moving" gradient
+    const offset1 = 50 + normalizedX * 20; // Centered around 50%, moves left/right
+    const offset2 = 50 + normalizedY * 20; // Centered around 50%, moves up/down
+    const offset3 = 75 + normalizedX * 10; // Subtle offset for depth
+
+    // Update gradient stops
     gradientElement.children[0].setAttribute(
       "style",
-      `stop-color: rgba(${red}, 255, 155, 0.9);`
+      `stop-color: rgba(${red1}, ${green1}, ${blue1}, 0.9); stop-opacity: 1;`
     );
+    gradientElement.children[0].setAttribute("offset", `${offset1}%`);
+
     gradientElement.children[1].setAttribute(
       "style",
-      `stop-color: rgba(255, ${green}, 0, 0.9);`
+      `stop-color: rgba(${red2}, ${green1}, ${blue1}, 0.7); stop-opacity: 0.8;`
     );
+    gradientElement.children[1].setAttribute("offset", `${offset2}%`);
+
     gradientElement.children[2].setAttribute(
       "style",
-      `stop-color: rgba(255, 155, ${blue}, 1);`
+      `stop-color: rgba(${red1}, ${green2}, ${blue2}, 0.5); stop-opacity: 0.6;`
     );
+    gradientElement.children[2].setAttribute("offset", `${offset3}%`);
+
     gradientElement.children[3].setAttribute(
       "style",
-      `stop-color: rgba(0, ${green}, ${blue}, 0.8);`
+      `stop-color: rgba(${red2}, ${green2}, ${blue1}, 0.4); stop-opacity: 0.5;`
     );
+    gradientElement.children[3].setAttribute("offset", `${100 - offset2}%`);
+
     gradientElement.children[4].setAttribute(
       "style",
-      `stop-color: rgba(0, 0, ${blue}, 0.6);`
+      `stop-color: rgba(${red1}, ${green2}, ${blue2}, 0.3); stop-opacity: 0.4;`
     );
+    gradientElement.children[4].setAttribute("offset", `${100 - offset1}%`);
   });
 }
 
