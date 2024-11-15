@@ -15,6 +15,9 @@
 }
 .logo {
   position: absolute;
+  width: 250px;
+  height: 250px;
+  margin: 8px auto auto 80px;
 }
 
 /* Apply styles for the SVG container */
@@ -65,16 +68,17 @@ svg {
 }
 
 .overlay {
+  margin: 10px auto auto 10px;
+
   font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
   font-size: 26px;
   color: white;
   font-weight: 500;
   position: absolute;
   z-index: 30;
-  width: 300px;
-  top: 0;
-  left: 0;
-  height: 300px;
+  width: 280px;
+  height: 280px;
+
   border-radius: 50%;
   background-color: rgba(107, 128, 147, 0.452);
   overflow: hidden;
@@ -87,15 +91,15 @@ svg {
 .marquee-text {
   position: relative;
   font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
-  font-size: 26px;
+  font-size: 20px;
 
-  font-weight: 500;
   white-space: nowrap;
   color: rgba(18, 1, 1, 0.206);
 }
 
 /* vanta elm */
 #circle-elm {
+  /* color: #1e8fffc5; */
   position: absolute;
   z-index: -25;
   width: 250px;
@@ -104,4 +108,13 @@ svg {
   border-radius: 50%;
   overflow: hidden;
   /* border: solid 5px blue; */
+}
+#border {
+  position: absolute;
+  z-index: -55;
+  width: 310px;
+  height: 310px;
+  margin: -4px auto auto -5px;
+  border-radius: 50%;
+  overflow: hidden;
 }

@@ -205,12 +205,12 @@ document.addEventListener("DOMContentLoaded", function () {
       el: "#circle-elm",
       mouseControls: true,
       touchControls: true,
-      gyroControls: false,
+      gyroControls: true,
       minHeight: 200.0,
       minWidth: 200.0,
       scale: 1.0,
       scaleMobile: 1.0,
-      color: 0x1e90ff, // Blue waves
+      color: 0x1e8fffc5, // Blue waves
       shininess: 50,
       waveHeight: 20,
       waveSpeed: 1,
