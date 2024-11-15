@@ -48,6 +48,13 @@ function initializeMotionAccess() {
 }
 
 function startGradientEffect() {
+  // handle logo shadow
+  const svgElement = document.getElementById("svglogo");
+  const xOffset = Math.round(gamma * 0.5); // Shadow offset X
+  const yOffset = Math.round(beta * 0.5); // Shadow offset Y
+  svgElement.style.filter = `drop-shadow(${xOffset}px ${yOffset}px 10px rgba(0, 0, 0, 0.5))`;
+
+  // finish
   const gradientElement = document.querySelector("#gradient1");
 
   // Start the motion handler
@@ -129,41 +136,6 @@ function startGradientEffect() {
     gradientElement.children[3].setAttribute(
       "offset",
       `${Math.min(100, offset4)}%`
-    );
-  });
-}
-
-function startGradientEffect() {
-  const gradientElement = document.querySelector("#gradient1");
-
-  startMotionHandler((x, y) => {
-    const updated_x = Math.abs(x * 1);
-    const updated_y = y * 1;
-    const angle = Math.atan2(updated_y, updated_x) * (180 / Math.PI);
-
-    const red = Math.abs(Math.sin((angle * Math.PI) / 180) * 255);
-    const green = Math.abs(Math.cos((angle * Math.PI) / 180) * 255);
-    const blue = Math.abs(Math.sin(((angle + 90) * Math.PI) / 180) * 255);
-
-    gradientElement.children[0].setAttribute(
-      "style",
-      `stop-color: rgba(${red}, 0, 0, 0.9);`
-    );
-    gradientElement.children[1].setAttribute(
-      "style",
-      `stop-color: rgba(155, ${green}, 0, 0.9);`
-    );
-    gradientElement.children[2].setAttribute(
-      "style",
-      `stop-color: rgba(255, 155, ${blue}, 1);`
-    );
-    gradientElement.children[3].setAttribute(
-      "style",
-      `stop-color: rgba(0, ${green}, ${blue}, 0.8);`
-    );
-    gradientElement.children[4].setAttribute(
-      "style",
-      `stop-color: rgba(0, 0, ${blue}, 0.6);`
     );
   });
 }
