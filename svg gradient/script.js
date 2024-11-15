@@ -197,3 +197,25 @@ document.addEventListener("DOMContentLoaded", () => {
   moveText(document.querySelector(".text4"), 85, 270, 10000);
   moveText(document.querySelector(".text5"), 290, 70, 10000);
 });
+
+//vanta elm design
+document.addEventListener("DOMContentLoaded", function () {
+  try {
+    VANTA.WAVES({
+      el: "#circle-elm",
+      mouseControls: true,
+      touchControls: true,
+      gyroControls: false,
+      minHeight: 200.0,
+      minWidth: 200.0,
+      scale: 1.0,
+      scaleMobile: 1.0,
+      color: 0x1e90ff, // Blue waves
+      shininess: 50,
+      waveHeight: 20,
+      waveSpeed: 1,
+    });
+  } catch (error) {
+    console.error("Vanta initialization error:", error);
+  }
+});
