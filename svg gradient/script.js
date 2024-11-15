@@ -191,11 +191,12 @@ function moveText(element, startDegree, endDegree, duration) {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-  moveText(document.querySelector(".text1"), 215, 145, 10000);
+  moveText(document.querySelector(".text1"), 255, 105, 10000);
   moveText(document.querySelector(".text2"), 125, 235, 10000);
   moveText(document.querySelector(".text3"), 255, 105, 10000);
-  moveText(document.querySelector(".text4"), 85, 270, 10000);
-  moveText(document.querySelector(".text5"), 290, 70, 10000);
+  moveText(document.querySelector(".text4"), 85, 275, 10000);
+  moveText(document.querySelector(".text5"), 285, 72, 10000);
+  moveText(document.querySelector(".text6"), 100, 260, 10000);
 });
 
 //vanta elm design
