@@ -77,10 +77,6 @@ function startMotionHandler(onMotionUpdate) {
 
 function startGradientEffect() {
   // handle logo shadow
-  const svgElement = document.getElementById("svglogo");
-  const xOffset = Math.round(gamma * 0.5); // Shadow offset X
-  const yOffset = Math.round(beta * 0.5); // Shadow offset Y
-  svgElement.style.filter = `drop-shadow(${xOffset}px ${yOffset}px 10px rgba(0, 0, 0, 0.5))`;
 
   // finish
   const gradientElement = document.querySelector("#gradient1");
@@ -91,6 +87,13 @@ function startGradientEffect() {
     const normalizedX = x / 45; // Adjust to make changes more noticeable
     const normalizedY = y / 45; // Adjust to make changes more noticeable
     const angle = Math.atan2(normalizedY, normalizedX) * (180 / Math.PI);
+
+    // shadow adjustments
+    const svgElement = document.querySelector("#svglogo");
+    const shadowOffsetX = Math.round(Math.cos((angle * Math.PI) / 180) * 10); // Scale as needed
+    const shadowOffsetY = Math.round(Math.sin((angle * Math.PI) / 180) * 10); // Scale as needed
+    svgElement.style.filter = `drop-shadow(${shadowOffsetX}px ${shadowOffsetY}px 10px rgba(0, 0, 0, 0.5))`;
+    // uptil here
 
     // Define base colors for the gradient (vibrant colors)
     const baseColor1 = { r: 255, g: 120, b: 90 }; // Vibrant red-orange
