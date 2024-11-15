@@ -87,50 +87,67 @@ function startGradientEffect() {
     const normalizedY = y / 90; // Normalize y tilt to range [-1, 1]
     const angle = Math.atan2(normalizedY, normalizedX) * (180 / Math.PI);
 
-    // Calculate RGB values for dynamic gradients
-    const red1 = Math.abs(Math.sin((angle * Math.PI) / 180) * 255);
-    const green1 = Math.abs(Math.cos((angle * Math.PI) / 180) * 255);
-    const blue1 = Math.abs(Math.sin(((angle + 90) * Math.PI) / 180) * 255);
+    // Define base colors for the gradient
+    const baseColor1 = { r: 255, g: 200, b: 150 }; // Soft peach
+    const baseColor2 = { r: 200, g: 150, b: 255 }; // Lavender
+    const baseColor3 = { r: 150, g: 255, b: 200 }; // Mint green
+    const baseColor4 = { r: 255, g: 255, b: 200 }; // Pale yellow
 
-    const red2 = Math.abs(Math.cos(((angle + 45) * Math.PI) / 180) * 255);
-    const green2 = Math.abs(Math.sin(((angle + 45) * Math.PI) / 180) * 255);
-    const blue2 = Math.abs(Math.cos(((angle + 90) * Math.PI) / 180) * 255);
+    // Adjust colors dynamically based on the tilt angle
+    const color1 = {
+      r: Math.min(255, baseColor1.r + normalizedX * 50),
+      g: Math.min(255, baseColor1.g + normalizedY * 50),
+      b: Math.max(0, baseColor1.b - normalizedX * 30),
+    };
+
+    const color2 = {
+      r: Math.max(0, baseColor2.r - normalizedY * 40),
+      g: Math.min(255, baseColor2.g + normalizedX * 30),
+      b: Math.min(255, baseColor2.b + normalizedY * 50),
+    };
+
+    const color3 = {
+      r: Math.min(255, baseColor3.r + normalizedY * 40),
+      g: Math.max(0, baseColor3.g - normalizedX * 50),
+      b: Math.min(255, baseColor3.b + normalizedX * 30),
+    };
+
+    const color4 = {
+      r: Math.min(255, baseColor4.r + normalizedX * 20),
+      g: Math.min(255, baseColor4.g + normalizedY * 20),
+      b: Math.max(0, baseColor4.b - normalizedY * 20),
+    };
 
     // Adjust offsets to create a "moving" gradient
-    const offset1 = 50 + normalizedX * 20; // Centered around 50%, moves left/right
-    const offset2 = 50 + normalizedY * 20; // Centered around 50%, moves up/down
-    const offset3 = 75 + normalizedX * 10; // Subtle offset for depth
+    const offset1 = 20 + normalizedX * 10; // Offset for stop 1
+    const offset2 = 40 + normalizedY * 10; // Offset for stop 2
+    const offset3 = 60 + normalizedX * 10; // Offset for stop 3
+    const offset4 = 80 + normalizedY * 10; // Offset for stop 4
 
     // Update gradient stops
     gradientElement.children[0].setAttribute(
       "style",
-      `stop-color: rgba(${red1}, ${green1}, ${blue1}, 0.9); stop-opacity: 1;`
+      `stop-color: rgba(${color1.r}, ${color1.g}, ${color1.b}, 1); stop-opacity: 1;`
     );
     gradientElement.children[0].setAttribute("offset", `${offset1}%`);
 
     gradientElement.children[1].setAttribute(
       "style",
-      `stop-color: rgba(${red2}, ${green1}, ${blue1}, 0.7); stop-opacity: 0.8;`
+      `stop-color: rgba(${color2.r}, ${color2.g}, ${color2.b}, 1); stop-opacity: 0.9;`
     );
     gradientElement.children[1].setAttribute("offset", `${offset2}%`);
 
     gradientElement.children[2].setAttribute(
       "style",
-      `stop-color: rgba(${red1}, ${green2}, ${blue2}, 0.5); stop-opacity: 0.6;`
+      `stop-color: rgba(${color3.r}, ${color3.g}, ${color3.b}, 1); stop-opacity: 0.8;`
     );
     gradientElement.children[2].setAttribute("offset", `${offset3}%`);
 
     gradientElement.children[3].setAttribute(
       "style",
-      `stop-color: rgba(${red2}, ${green2}, ${blue1}, 0.4); stop-opacity: 0.5;`
+      `stop-color: rgba(${color4.r}, ${color4.g}, ${color4.b}, 1); stop-opacity: 0.7;`
     );
-    gradientElement.children[3].setAttribute("offset", `${100 - offset2}%`);
-
-    gradientElement.children[4].setAttribute(
-      "style",
-      `stop-color: rgba(${red1}, ${green2}, ${blue2}, 0.3); stop-opacity: 0.4;`
-    );
-    gradientElement.children[4].setAttribute("offset", `${100 - offset1}%`);
+    gradientElement.children[3].setAttribute("offset", `${offset4}%`);
   });
 }
 
