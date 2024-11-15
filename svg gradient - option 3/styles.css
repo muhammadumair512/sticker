@@ -164,8 +164,7 @@ svg {
 .svglogo {
   position: absolute;
   z-index: 5;
-  top: 0;
-  left: 0;
+  margin: auto auto auto 75px;
 }
 .logo {
   position: absolute;
