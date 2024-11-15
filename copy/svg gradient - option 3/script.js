@@ -24,6 +24,7 @@ gradientElement.children[4].setAttribute(
   "style",
   `stop-color: rgba(6, 54, 5, 0.9);`
 );
+
 const multGamma = 1.0;
 const multBeta = 0.7;
 const colorMultiplier = 3;
@@ -45,6 +46,7 @@ function initializeMotionAccess() {
     startGradientEffect();
   }
 }
+
 function startMotionHandler(onMotionUpdate) {
   const isMacSafari =
     /^((?!chrome|android).)*safari/i.test(navigator.userAgent) &&
@@ -76,9 +78,6 @@ function startMotionHandler(onMotionUpdate) {
 }
 
 function startGradientEffect() {
-  // handle logo shadow
-
-  // finish
   const gradientElement = document.querySelector("#gradient1");
 
   // Start the motion handler
@@ -94,7 +93,6 @@ function startGradientEffect() {
     const shadowOffsetY = Math.round(Math.sin((angle * Math.PI) / 180) * 10); // Scale as needed
     svgElement.style.filter = `drop-shadow(${shadowOffsetX}px ${shadowOffsetY}px 10px rgba(0, 0, 0, 0.5))`;
     // uptil here
-
     // Define base colors for the gradient (vibrant colors)
     const baseColor1 = { r: 255, g: 120, b: 90 }; // Vibrant red-orange
     const baseColor2 = { r: 90, g: 180, b: 255 }; // Sky blue
@@ -181,6 +179,32 @@ function calculatePosition(degree, radius) {
   };
 }
 
+function moveText(element, startDegree, endDegree, duration) {
+  const radius = 300; // Radius of the circle-container
+  const startPos = calculatePosition(startDegree, radius);
+  const endPos = calculatePosition(endDegree, radius);
+  const keyframes = [
+    {
+      transform: `translate(${startPos.x}px, ${startPos.y}px) rotate(30deg)`,
+    },
+    {
+      transform: `translate(${endPos.x}px, ${endPos.y}px) rotate(30deg)`,
+    },
+  ];
+  element.animate(keyframes, {
+    duration: duration,
+    iterations: Infinity,
+    easing: "linear",
+  });
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  moveText(document.querySelector(".text1"), 215, 145, 10000);
+  moveText(document.querySelector(".text2"), 125, 235, 10000);
+  moveText(document.querySelector(".text3"), 245, 100, 10000);
+  moveText(document.querySelector(".text4"), 80, 260, 10000);
+  moveText(document.querySelector(".text5"), 280, 60, 10000);
+});
 // gradient circle
 
 // Function to update gradient based on device tilt with increased sensitivity

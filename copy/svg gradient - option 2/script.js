@@ -181,6 +181,32 @@ function calculatePosition(degree, radius) {
   };
 }
 
+function moveText(element, startDegree, endDegree, duration) {
+  const radius = 300; // Radius of the circle-container
+  const startPos = calculatePosition(startDegree, radius);
+  const endPos = calculatePosition(endDegree, radius);
+  const keyframes = [
+    {
+      transform: `translate(${startPos.x}px, ${startPos.y}px) rotate(30deg)`,
+    },
+    {
+      transform: `translate(${endPos.x}px, ${endPos.y}px) rotate(30deg)`,
+    },
+  ];
+  element.animate(keyframes, {
+    duration: duration,
+    iterations: Infinity,
+    easing: "linear",
+  });
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  moveText(document.querySelector(".text1"), 215, 145, 10000);
+  moveText(document.querySelector(".text2"), 125, 235, 10000);
+  moveText(document.querySelector(".text3"), 245, 100, 10000);
+  moveText(document.querySelector(".text4"), 80, 260, 10000);
+  moveText(document.querySelector(".text5"), 280, 60, 10000);
+});
 // gradient circle
 
 // Function to update gradient based on device tilt with increased sensitivity

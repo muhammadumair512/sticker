@@ -24,6 +24,7 @@ gradientElement.children[4].setAttribute(
   "style",
   `stop-color: rgba(6, 54, 5, 0.9);`
 );
+
 const multGamma = 1.0;
 const multBeta = 0.7;
 const colorMultiplier = 3;
@@ -45,6 +46,7 @@ function initializeMotionAccess() {
     startGradientEffect();
   }
 }
+
 function startMotionHandler(onMotionUpdate) {
   const isMacSafari =
     /^((?!chrome|android).)*safari/i.test(navigator.userAgent) &&
@@ -76,9 +78,6 @@ function startMotionHandler(onMotionUpdate) {
 }
 
 function startGradientEffect() {
-  // handle logo shadow
-
-  // finish
   const gradientElement = document.querySelector("#gradient1");
 
   // Start the motion handler
@@ -87,14 +86,12 @@ function startGradientEffect() {
     const normalizedX = x / 45; // Adjust to make changes more noticeable
     const normalizedY = y / 45; // Adjust to make changes more noticeable
     const angle = Math.atan2(normalizedY, normalizedX) * (180 / Math.PI);
-
     // shadow adjustments
-    const svgElement = document.querySelector("#svglogo");
-    const shadowOffsetX = Math.round(Math.cos((angle * Math.PI) / 180) * 10); // Scale as needed
-    const shadowOffsetY = Math.round(Math.sin((angle * Math.PI) / 180) * 10); // Scale as needed
-    svgElement.style.filter = `drop-shadow(${shadowOffsetX}px ${shadowOffsetY}px 10px rgba(0, 0, 0, 0.5))`;
+    // const svgElement = document.querySelector("#svglogo");
+    // const shadowOffsetX = Math.round(Math.cos((angle * Math.PI) / 180) * 10); // Scale as needed
+    // const shadowOffsetY = Math.round(Math.sin((angle * Math.PI) / 180) * 10); // Scale as needed
+    // svgElement.style.filter = `drop-shadow(${shadowOffsetX}px ${shadowOffsetY}px 10px rgba(0, 0, 0, 0.5))`;
     // uptil here
-
     // Define base colors for the gradient (vibrant colors)
     const baseColor1 = { r: 255, g: 120, b: 90 }; // Vibrant red-orange
     const baseColor2 = { r: 90, g: 180, b: 255 }; // Sky blue
@@ -171,8 +168,6 @@ function startGradientEffect() {
   });
 }
 
-// script for diagonal text move
-
 function calculatePosition(degree, radius) {
   const radians = (degree - 60) * (Math.PI / 180);
   return {
@@ -181,66 +176,52 @@ function calculatePosition(degree, radius) {
   };
 }
 
-// gradient circle
-
-// Function to update gradient based on device tilt with increased sensitivity
-function updateGradient(tiltX, tiltY) {
-  const gradientCircle = document.querySelector(".gradient-circle");
-
-  // Adjust sensitivity by scaling tilt values
-  const angleX = (Math.min(Math.max(tiltX, -90), 90) + 90) * 1.5;
-  const angleY = (Math.min(Math.max(tiltY, -90), 90) + 90) * 1.5;
-  const angle = (angleX * 0.7 + angleY * 0.3) % 360;
-
-  gradientCircle.style.background = `
-radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.3) 25%, rgba(255, 255, 255, 0.1) 50%, rgba(255, 255, 255, 0) 75%) 50% 50%,
-radial-gradient(circle at 50% 50%, rgba(240, 230, 140, 0.3) 0%, rgba(250, 250, 210, 0.2) 30%, rgba(240, 230, 140, 0) 70%) 50% 50%,
-linear-gradient(${angle}deg, rgba(255, 154, 158, 0.7), rgba(250, 208, 196, 0.7), rgba(212, 252, 121, 0.7), rgba(150, 230, 161, 0.7), rgba(146, 169, 255, 0.7), rgba(255, 154, 158, 0.7))
-`;
+function moveText(element, startDegree, endDegree, duration) {
+  const radius = 300; // Radius of the circle-container
+  const startPos = calculatePosition(startDegree, radius);
+  const endPos = calculatePosition(endDegree, radius);
+  const keyframes = [
+    {
+      transform: `translate(${startPos.x}px, ${startPos.y}px) rotate(30deg)`,
+    },
+    {
+      transform: `translate(${endPos.x}px, ${endPos.y}px) rotate(30deg)`,
+    },
+  ];
+  element.animate(keyframes, {
+    duration: duration,
+    iterations: Infinity,
+    easing: "linear",
+  });
 }
 
-// Request permission for motion and orientation on iOS
-function requestPermissionForiOS() {
-  if (typeof DeviceOrientationEvent.requestPermission === "function") {
-    DeviceOrientationEvent.requestPermission()
-      .then((permissionState) => {
-        if (permissionState === "granted") {
-          window.addEventListener("deviceorientation", handleOrientation);
-          document.getElementById("request-permission").style.display = "none";
-        } else {
-          alert("Permission to access motion data was denied.");
-        }
-      })
-      .catch(console.error);
-  } else {
-    // If not iOS, add the event listener directly
-    window.addEventListener("deviceorientation", handleOrientation);
+document.addEventListener("DOMContentLoaded", () => {
+  moveText(document.querySelector(".text5"), 285, 72, 10000);
+  moveText(document.querySelector(".text4"), 85, 275, 10000);
+  moveText(document.querySelector(".text1"), 255, 105, 10000);
+  moveText(document.querySelector(".text6"), 260, 100, 10000);
+  moveText(document.querySelector(".text3"), 105, 255, 10000);
+  moveText(document.querySelector(".text2"), 125, 235, 10000);
+});
+
+//vanta elm design
+document.addEventListener("DOMContentLoaded", function () {
+  try {
+    VANTA.WAVES({
+      el: "#circle-elm",
+      mouseControls: true,
+      touchControls: true,
+      gyroControls: true,
+      minHeight: 200.0,
+      minWidth: 200.0,
+      scale: 1.0,
+      scaleMobile: 1.0,
+      color: 0x1e8fffc5, // Blue waves
+      shininess: 50,
+      waveHeight: 20,
+      waveSpeed: 1,
+    });
+  } catch (error) {
+    console.error("Vanta initialization error:", error);
   }
-}
-
-function handleOrientation(event) {
-  const { beta, gamma } = event; // tilt front/back and left/right
-  if (beta !== null && gamma !== null) {
-    updateGradient(gamma, beta);
-  }
-}
-
-// Check for iOS and show the permission request button if needed
-if (typeof DeviceOrientationEvent.requestPermission === "function") {
-  document.getElementById("request-permission").style.display = "block";
-  document
-    .getElementById("request-permission")
-    .addEventListener("click", requestPermissionForiOS);
-} else {
-  // Directly add the event listener on non-iOS devices
-  window.addEventListener("deviceorientation", handleOrientation);
-}
-
-// circle script
-const text = document.querySelector(".text p");
-text.innerHTML = text.innerText
-  .split("")
-  .map(
-    (char, i) => `<span style="transform:rotate(${i * 15}deg)">${char}</span>`
-  )
-  .join("");
+});

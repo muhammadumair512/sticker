@@ -3,16 +3,14 @@
 }
 #containerAll {
   position: relative;
-  top: 20px;
-  left: 20px;
+  top: 0;
+  left: 0;
   display: flex;
-  width: 300px;
-  height: 300px;
 }
 .svglogo {
   position: absolute;
   z-index: 5;
-  margin: auto auto auto 25%;
+  margin: auto auto auto 75px;
   filter: drop-shadow(5px 5px 5px rgba(0, 0, 0, 0.5));
   transition: filter 0.1s ease, background 0.1s ease;
 }
@@ -24,9 +22,9 @@
 }
 .logo {
   position: absolute;
-  width: 83.3%;
-  height: 83.3%;
-  margin: 2.6% auto auto 26.6%;
+  width: 250px;
+  height: 250px;
+  margin: 8px auto auto 80px;
 }
 
 /* Apply styles for the SVG container */
@@ -34,36 +32,50 @@
   width: 100%;
   height: 100%;
 }
-#svglogo {
-  width: 96.6%;
-  height: 96.6%;
+svg {
+  width: 290px;
+  height: 290px;
+  /* margin: 5px 0 auto 2px; */
   margin: auto;
-  margin-left: 25.6%;
-  /* margin-top: 0.6%; */
+  margin-left: 8px;
+  margin-top: 2px;
 }
-.svg1 {
-  width: 130%;
-  height: 115%;
-  margin: -10% auto auto -16%;
-}
+/* svg {
+  width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+} */
 
 /* The request-permission button for iOS */
+#request-permission {
+  position: absolute;
+  z-index: -20;
+  top: 10px;
+  left: 10px;
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  border: none;
+  padding: 10px;
+  font-size: 14px;
+  display: block;
+}
 
 /* diagonal text move */
 /* Circle container styling */
 .circle-container {
   position: absolute;
   z-index: -20;
-  width: 83.3%;
-  height: 83.3%;
-  margin: 8.3% auto auto 10%;
+  width: 250px;
+  height: 250px;
+  margin: 25px auto auto 30px;
   /* background-color: lightgray; */
   border-radius: 50%;
   overflow: hidden;
 }
 
 .overlay {
-  margin: 3.3% auto auto 3.3%;
+  margin: 10px auto auto 10px;
 
   font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
   font-size: 26px;
@@ -71,8 +83,9 @@
   font-weight: 500;
   position: absolute;
   z-index: 30;
-  width: 93.3%;
-  height: 93.3%;
+  width: 280px;
+  height: 280px;
+
   border-radius: 50%;
   background-color: rgba(107, 128, 147, 0.452);
   overflow: hidden;
@@ -96,9 +109,9 @@
   /* color: #1e8fffc5; */
   position: absolute;
   z-index: -25;
-  width: 83.3%;
-  height: 83.3%;
-  margin: 8.3% auto auto 8.3%;
+  width: 250px;
+  height: 250px;
+  margin: 25px auto auto 25px;
   border-radius: 50%;
   overflow: hidden;
   /* border: solid 5px blue; */
@@ -106,9 +119,9 @@
 #border {
   position: absolute;
   z-index: -55;
-  width: 110%;
-  height: 110%;
-  margin: -5.3% auto auto -5.6%;
+  width: 310px;
+  height: 310px;
+  margin: -4px auto auto -5px;
   border-radius: 50%;
   overflow: hidden;
 }
