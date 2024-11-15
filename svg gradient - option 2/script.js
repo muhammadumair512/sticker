@@ -24,7 +24,6 @@ gradientElement.children[4].setAttribute(
   "style",
   `stop-color: rgba(6, 54, 5, 0.9);`
 );
-
 const multGamma = 1.0;
 const multBeta = 0.7;
 const colorMultiplier = 3;
@@ -44,6 +43,35 @@ function initializeMotionAccess() {
       .catch(console.error);
   } else {
     startGradientEffect();
+  }
+}
+function startMotionHandler(onMotionUpdate) {
+  const isMacSafari =
+    /^((?!chrome|android).)*safari/i.test(navigator.userAgent) &&
+    navigator.platform.toUpperCase().indexOf("MAC") >= 0;
+
+  if (isMacSafari) {
+    let xPosition = 0;
+    let yPosition = 0;
+    let stepX = 0.1;
+    let stepY = 0.1;
+
+    setInterval(() => {
+      xPosition += stepX;
+      yPosition += stepY;
+
+      if (xPosition >= 5 || xPosition <= -5) stepX = -stepX;
+      if (yPosition >= 5 || yPosition <= -5) stepY = -stepY;
+      onMotionUpdate(xPosition, yPosition);
+    }, 10);
+  } else if (window.DeviceOrientationEvent) {
+    window.addEventListener("deviceorientation", (event) => {
+      let gamma = event.gamma || 0;
+      let beta = event.beta || 0;
+      onMotionUpdate(gamma, beta);
+    });
+  } else {
+    alert("Device orientation not supported on this device/browser.");
   }
 }
 
