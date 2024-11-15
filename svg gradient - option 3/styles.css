@@ -162,6 +162,8 @@ svg {
   position: absolute;
   z-index: 5;
   margin: auto auto auto 75px;
+  filter: drop-shadow(5px 5px 5px rgba(0, 0, 0, 0.5));
+  transition: filter 0.1s ease, background 0.1s ease;
 }
 .logo {
   position: absolute;
