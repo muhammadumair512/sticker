@@ -1,20 +1,23 @@
-// marquee new
 function Marqueertl(selector, speed) {
   const parentSelector = document.querySelector(selector);
   const clone = parentSelector.innerHTML;
   const firstElement = parentSelector.children[0];
   let i = 0;
-  console.log(firstElement);
+
+  // Clone the content for seamless scrolling
   parentSelector.insertAdjacentHTML("beforeend", clone);
   parentSelector.insertAdjacentHTML("beforeend", clone);
 
-  setInterval(function () {
+  // Animation function using requestAnimationFrame
+  function animate() {
     firstElement.style.marginLeft = `-${i}px`;
     if (i > firstElement.clientWidth) {
-      i = 0;
+      i = 0; // Reset when content scrolls completely
     }
-    i = i + speed;
-  }, 0);
+    i += speed; // Increment by speed
+    requestAnimationFrame(animate); // Call the animation on the next frame
+  }
+  animate(); // Start the animation
 }
 
 function Marqueeltr(selector, speed) {
@@ -23,31 +26,37 @@ function Marqueeltr(selector, speed) {
   const firstElement = parentSelector.children[0];
   let i = firstElement.clientWidth; // Start scrolling from the right edge
 
-  // Clone the content for seamless looping
+  // Clone the content for seamless scrolling
   parentSelector.insertAdjacentHTML("beforeend", clone);
   parentSelector.insertAdjacentHTML("beforeend", clone);
 
-  setInterval(function () {
+  // Animation function using requestAnimationFrame
+  function animate() {
     firstElement.style.marginLeft = `-${i}px`; // Move left
-    i -= speed; // Decrease position
     if (i <= 0) {
       i = firstElement.clientWidth; // Reset to start position
     }
-  }, 0); // Smooth interval (60fps ~ 16ms)
+    i -= speed; // Decrease position
+    requestAnimationFrame(animate); // Call the animation on the next frame
+  }
+  animate(); // Start the animation
 }
 
-window.addEventListener("load", Marqueertl(".text1", 0.1));
-window.addEventListener("load", Marqueertl(".text3", 0.1));
-window.addEventListener("load", Marqueertl(".text5", 0.1));
-window.addEventListener("load", Marqueertl(".text7", 0.1));
-window.addEventListener("load", Marqueertl(".text9", 0.1));
-window.addEventListener("load", Marqueertl(".text11", 0.1));
-window.addEventListener("load", Marqueeltr(".text2", 0.1));
-window.addEventListener("load", Marqueeltr(".text4", 0.1));
-window.addEventListener("load", Marqueeltr(".text6", 0.1));
-window.addEventListener("load", Marqueeltr(".text8", 0.1));
-window.addEventListener("load", Marqueeltr(".text10", 0.1));
-window.addEventListener("load", Marqueeltr(".text12", 0.1));
+// Start animations after the page is fully loaded
+window.addEventListener("load", () => {
+  Marqueertl(".text1", 0.5);
+  Marqueertl(".text3", 0.5);
+  Marqueertl(".text5", 0.5);
+  Marqueertl(".text7", 0.5);
+  Marqueertl(".text9", 0.5);
+  Marqueertl(".text11", 0.5);
+  Marqueeltr(".text2", 0.5);
+  Marqueeltr(".text4", 0.5);
+  Marqueeltr(".text6", 0.5);
+  Marqueeltr(".text8", 0.5);
+  Marqueeltr(".text10", 0.5);
+  Marqueeltr(".text12", 0.5);
+});
 
 const gradientElement = document.querySelector("#gradient1");
 
