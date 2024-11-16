@@ -83,28 +83,60 @@ function startGradientEffect() {
 
   // Start the motion handler
   startMotionHandler((x, y) => {
-    // Normalize and scale tilt values
-    const normalizedX = x / 45; // Adjust to make changes more noticeable
-    const normalizedY = y / 45; // Adjust to make changes more noticeable
+    // Normalize and scale tilt values for noticeable changes
+    const normalizedX = x / 15; // Amplify tilt sensitivity (lower divisor = more noticeable)
+    const normalizedY = y / 15;
+
     const angle = Math.atan2(normalizedY, normalizedX) * (180 / Math.PI);
 
     // Apply drop shadow adjustments
     const svgElement = document.querySelector("#svglogo");
-    const shadowOffsetX = Math.round(Math.cos((angle * Math.PI) / 180) * 10); // Scale as needed
-    const shadowOffsetY = Math.round(Math.sin((angle * Math.PI) / 180) * 10); // Scale as needed
+    const shadowOffsetX = Math.round(Math.cos((angle * Math.PI) / 180) * 20); // Increased scale
+    const shadowOffsetY = Math.round(Math.sin((angle * Math.PI) / 180) * 20);
     svgElement.style.filter = `drop-shadow(${shadowOffsetX}px ${shadowOffsetY}px 10px rgba(0, 0, 0, 0.5))`;
 
-    // Amplify offset shifts for more noticeable 3D motion
+    // Amplify offset shifts for more noticeable motion
     const offset1 = 0 + normalizedX * 10; // Offset for stop 1
     const offset2 = 25 + normalizedY * 10; // Offset for stop 2
     const offset3 = 50 + normalizedX * 10; // Offset for stop 3
     const offset4 = 75 + normalizedY * 10; // Offset for stop 4
     const offset5 = 100; // Final stop stays at 100%
 
+    // Amplify color shifts for more noticeable effects
+    const color1 = {
+      r: Math.max(0, Math.min(255, 228 + normalizedX * 50)),
+      g: Math.max(0, Math.min(255, 14 + normalizedY * 50)),
+      b: Math.max(0, Math.min(255, 14 + normalizedX * 50)),
+    };
+
+    const color2 = {
+      r: Math.max(0, Math.min(255, 9 + normalizedX * 50)),
+      g: Math.max(0, Math.min(255, 235 + normalizedY * 50)),
+      b: Math.max(0, Math.min(255, 156 + normalizedX * 50)),
+    };
+
+    const color3 = {
+      r: Math.max(0, Math.min(255, 32 + normalizedY * 50)),
+      g: Math.max(0, Math.min(255, 18 + normalizedX * 50)),
+      b: Math.max(0, Math.min(255, 229 + normalizedY * 50)),
+    };
+
+    const color4 = {
+      r: Math.max(0, Math.min(255, 192 + normalizedX * 30)),
+      g: Math.max(0, Math.min(255, 168 + normalizedY * 30)),
+      b: Math.max(0, Math.min(255, 168 + normalizedX * 30)),
+    };
+
+    const color5 = {
+      r: Math.max(0, Math.min(255, 6 + normalizedY * 50)),
+      g: Math.max(0, Math.min(255, 54 + normalizedX * 50)),
+      b: Math.max(0, Math.min(255, 5 + normalizedY * 50)),
+    };
+
     // Update gradient stops with new colors and offsets
     gradientElement.children[0].setAttribute(
       "style",
-      `stop-color: rgba(228, 14, 14, 0.9); stop-opacity: 1;`
+      `stop-color: rgba(${color1.r}, ${color1.g}, ${color1.b}, 0.9); stop-opacity: 1;`
     );
     gradientElement.children[0].setAttribute(
       "offset",
@@ -113,7 +145,7 @@ function startGradientEffect() {
 
     gradientElement.children[1].setAttribute(
       "style",
-      `stop-color: rgba(9, 235, 156, 0.9); stop-opacity: 1;`
+      `stop-color: rgba(${color2.r}, ${color2.g}, ${color2.b}, 0.9); stop-opacity: 1;`
     );
     gradientElement.children[1].setAttribute(
       "offset",
@@ -122,7 +154,7 @@ function startGradientEffect() {
 
     gradientElement.children[2].setAttribute(
       "style",
-      `stop-color: rgba(32, 18, 229, 0.9); stop-opacity: 1;`
+      `stop-color: rgba(${color3.r}, ${color3.g}, ${color3.b}, 0.9); stop-opacity: 1;`
     );
     gradientElement.children[2].setAttribute(
       "offset",
@@ -131,7 +163,7 @@ function startGradientEffect() {
 
     gradientElement.children[3].setAttribute(
       "style",
-      `stop-color: rgba(192, 168, 168, 0.9); stop-opacity: 1;`
+      `stop-color: rgba(${color4.r}, ${color4.g}, ${color4.b}, 0.9); stop-opacity: 1;`
     );
     gradientElement.children[3].setAttribute(
       "offset",
@@ -140,7 +172,7 @@ function startGradientEffect() {
 
     gradientElement.children[4].setAttribute(
       "style",
-      `stop-color: rgba(6, 54, 5, 0.9); stop-opacity: 1;`
+      `stop-color: rgba(${color5.r}, ${color5.g}, ${color5.b}, 0.9); stop-opacity: 1;`
     );
     gradientElement.children[4].setAttribute("offset", `${offset5}%`);
   });
