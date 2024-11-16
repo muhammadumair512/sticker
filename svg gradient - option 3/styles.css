@@ -59,10 +59,6 @@ svg {
 /* gradient circle */
 
 .gradient-circle {
-  box-shadow: 0 0 30px rgba(0, 0, 0, 0.15);
-  background-size: 200% 200%;
-  transition: background-position 0.1s ease-out;
-  overflow: clip;
   position: absolute;
   z-index: -20;
   margin: auto auto auto 1.2%;
@@ -171,7 +167,7 @@ svg {
   position: absolute;
   left: 50%;
   top: -15%;
-  font-size: 0.06em !important;
+  font-size: 0.6em !important;
   transform-origin: 0 50px;
 }
 /* border svg file */
