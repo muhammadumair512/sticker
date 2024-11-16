@@ -100,7 +100,7 @@ function startGradientEffect() {
     const offset2 = Math.max(0, 30 + normalizedY * 10); // Offset for stop 2
     const offset3 = Math.max(0, 50 + normalizedX * 10); // Offset for stop 3
     const offset4 = Math.max(0, 70 + normalizedY * 10); // Offset for stop 4
-    const offset5 = 100; // Final stop stays at 100%
+    const offset5 = 90; // Final stop stays at 100%
 
     // Adjust colors for better blending
     const color1 = {
@@ -236,6 +236,6 @@ const text = document.querySelector(".text p");
 text.innerHTML = text.innerText
   .split("")
   .map(
-    (char, i) => `<span style="transform:rotate(${i * 15}deg)">${char}</span>`
+    (char, i) => `<span style="transform:rotate(${i * 14}deg)">${char}</span>`
   )
   .join("");
