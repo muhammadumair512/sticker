@@ -44,18 +44,18 @@ function Marqueeltr(selector, speed) {
 
 // Start animations after the page is fully loaded
 window.addEventListener("load", () => {
-  Marqueertl(".text1", 0.5);
-  Marqueertl(".text3", 0.5);
-  Marqueertl(".text5", 0.5);
-  Marqueertl(".text7", 0.5);
-  Marqueertl(".text9", 0.5);
-  Marqueertl(".text11", 0.5);
-  Marqueeltr(".text2", 0.5);
-  Marqueeltr(".text4", 0.5);
-  Marqueeltr(".text6", 0.5);
-  Marqueeltr(".text8", 0.5);
-  Marqueeltr(".text10", 0.5);
-  Marqueeltr(".text12", 0.5);
+  Marqueertl(".text1", 0.9);
+  Marqueertl(".text3", 0.9);
+  Marqueertl(".text5", 0.9);
+  Marqueertl(".text7", 0.9);
+  Marqueertl(".text9", 0.9);
+  Marqueertl(".text11", 0.9);
+  Marqueeltr(".text2", 0.9);
+  Marqueeltr(".text4", 0.9);
+  Marqueeltr(".text6", 0.9);
+  Marqueeltr(".text8", 0.9);
+  Marqueeltr(".text10", 0.9);
+  Marqueeltr(".text12", 0.9);
 });
 
 const gradientElement = document.querySelector("#gradient1");
