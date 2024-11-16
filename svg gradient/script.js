@@ -33,7 +33,7 @@ function Marqueeltr(selector, speed) {
     if (i <= 0) {
       i = firstElement.clientWidth; // Reset to start position
     }
-  }, 16); // Smooth interval (60fps ~ 16ms)
+  }, 0); // Smooth interval (60fps ~ 16ms)
 }
 
 window.addEventListener("load", Marqueertl(".text1", 0.3));
