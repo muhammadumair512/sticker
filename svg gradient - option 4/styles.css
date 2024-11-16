@@ -137,22 +137,23 @@
 .glassmorphism {
   position: absolute;
   background: rgba(255, 255, 255, 0.3); /* Transparent white background */
-  backdrop-filter: blur(80px); /* Apply blur to the background */
+  backdrop-filter: blur(20px); /* Apply blur to the background */
+  -webkit-backdrop-filter: blur(20px); /* Add compatibility for iOS Safari */
   padding: 0; /* Set padding to 0 to avoid additional height */
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-  /* color: rgba(237, 229, 229, 0.686); */
   text-align: center;
   width: 124px;
   height: 30px !important;
   margin: 40% auto auto 8.5%;
   z-index: -14;
 
-  /* Set only left and right corners to be circular */
-  border-top-left-radius: 7px;
-  border-top-right-radius: 7px;
-  border-bottom-left-radius: 7px;
-  border-bottom-right-radius: 7px;
+  /* Border radius for all corners */
+  border-radius: 7px;
+
+  /* Fallback for devices without backdrop-filter support */
+  background-color: rgba(255, 255, 255, 0.7); /* Slightly opaque fallback */
 }
+
 .circle {
   z-index: -15;
   position: absolute;
@@ -188,7 +189,7 @@
 #text {
   color: rgba(18, 1, 1, 0.55);
   /* font-size: small; */
-  font-size: 13.2px;
+  font-size: 12.5px;
 
   position: absolute;
   margin: auto auto auto auto;

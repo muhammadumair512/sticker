@@ -36,18 +36,18 @@ function Marqueeltr(selector, speed) {
   }, 0); // Smooth interval (60fps ~ 16ms)
 }
 
-window.addEventListener("load", Marqueertl(".text1", 0.3));
-window.addEventListener("load", Marqueertl(".text3", 0.3));
-window.addEventListener("load", Marqueertl(".text5", 0.3));
-window.addEventListener("load", Marqueertl(".text7", 0.3));
-window.addEventListener("load", Marqueertl(".text9", 0.3));
-window.addEventListener("load", Marqueertl(".text11", 0.3));
-window.addEventListener("load", Marqueeltr(".text2", 0.3));
-window.addEventListener("load", Marqueeltr(".text4", 0.3));
-window.addEventListener("load", Marqueeltr(".text6", 0.3));
-window.addEventListener("load", Marqueeltr(".text8", 0.3));
-window.addEventListener("load", Marqueeltr(".text10", 0.3));
-window.addEventListener("load", Marqueeltr(".text12", 0.3));
+window.addEventListener("load", Marqueertl(".text1", 0.1));
+window.addEventListener("load", Marqueertl(".text3", 0.1));
+window.addEventListener("load", Marqueertl(".text5", 0.1));
+window.addEventListener("load", Marqueertl(".text7", 0.1));
+window.addEventListener("load", Marqueertl(".text9", 0.1));
+window.addEventListener("load", Marqueertl(".text11", 0.1));
+window.addEventListener("load", Marqueeltr(".text2", 0.1));
+window.addEventListener("load", Marqueeltr(".text4", 0.1));
+window.addEventListener("load", Marqueeltr(".text6", 0.1));
+window.addEventListener("load", Marqueeltr(".text8", 0.1));
+window.addEventListener("load", Marqueeltr(".text10", 0.1));
+window.addEventListener("load", Marqueeltr(".text12", 0.1));
 
 const gradientElement = document.querySelector("#gradient1");
 
