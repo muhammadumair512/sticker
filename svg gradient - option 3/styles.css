@@ -167,7 +167,7 @@ svg {
   position: absolute;
   left: 50%;
   top: -15%;
-  font-size: 1.6em !important;
+  font-size: 4em !important;
   transform-origin: 0 50px;
 }
 /* border svg file */
