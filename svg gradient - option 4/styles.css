@@ -136,11 +136,11 @@
 } */
 .glassmorphism {
   position: absolute;
-  background: rgba(255, 255, 255, 0.714); /* Transparent white background */
+  background: rgba(255, 255, 255, 0.5); /* Transparent white background */
   backdrop-filter: blur(80px); /* Apply blur to the background */
   padding: 0; /* Set padding to 0 to avoid additional height */
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-  color: rgb(221, 202, 202);
+  color: rgba(237, 229, 229, 0.686);
   text-align: center;
   width: 124px;
   height: 30px !important;
@@ -187,7 +187,9 @@
 
 #text {
   color: rgba(18, 1, 1, 0.55);
-  font-size: small;
+  /* font-size: small; */
+  font-size: 0.8em;
+
   position: absolute;
   margin: auto auto auto auto;
   z-index: -14;
