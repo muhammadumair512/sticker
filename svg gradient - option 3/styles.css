@@ -132,9 +132,12 @@ svg {
   align-items: center;
 }
 .svglogo {
+  width: 130%;
+  overflow: hidden;
+  height: 130%;
   position: absolute;
   z-index: 5;
-  margin: auto auto auto 25%;
+  margin: -16% auto auto 16%;
   filter: drop-shadow(5px 5px 5px rgba(0, 0, 0, 0.5));
   transition: filter 0.1s ease, background 0.1s ease;
 }

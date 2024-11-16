@@ -1,3 +1,54 @@
+// marquee new
+function Marqueertl(selector, speed) {
+  const parentSelector = document.querySelector(selector);
+  const clone = parentSelector.innerHTML;
+  const firstElement = parentSelector.children[0];
+  let i = 0;
+  console.log(firstElement);
+  parentSelector.insertAdjacentHTML("beforeend", clone);
+  parentSelector.insertAdjacentHTML("beforeend", clone);
+
+  setInterval(function () {
+    firstElement.style.marginLeft = `-${i}px`;
+    if (i > firstElement.clientWidth) {
+      i = 0;
+    }
+    i = i + speed;
+  }, 0);
+}
+
+function Marqueeltr(selector, speed) {
+  const parentSelector = document.querySelector(selector);
+  const clone = parentSelector.innerHTML;
+  const firstElement = parentSelector.children[0];
+  let i = firstElement.clientWidth; // Start scrolling from the right edge
+
+  // Clone the content for seamless looping
+  parentSelector.insertAdjacentHTML("beforeend", clone);
+  parentSelector.insertAdjacentHTML("beforeend", clone);
+
+  setInterval(function () {
+    firstElement.style.marginLeft = `-${i}px`; // Move left
+    i -= speed; // Decrease position
+    if (i <= 0) {
+      i = firstElement.clientWidth; // Reset to start position
+    }
+  }, 16); // Smooth interval (60fps ~ 16ms)
+}
+
+window.addEventListener("load", Marqueertl(".text1", 1));
+window.addEventListener("load", Marqueertl(".text3", 1));
+window.addEventListener("load", Marqueertl(".text5", 1));
+window.addEventListener("load", Marqueertl(".text7", 1));
+window.addEventListener("load", Marqueertl(".text9", 1));
+window.addEventListener("load", Marqueertl(".text11", 1));
+window.addEventListener("load", Marqueeltr(".text2", 1));
+window.addEventListener("load", Marqueeltr(".text4", 1));
+window.addEventListener("load", Marqueeltr(".text6", 1));
+window.addEventListener("load", Marqueeltr(".text8", 1));
+window.addEventListener("load", Marqueeltr(".text10", 1));
+window.addEventListener("load", Marqueeltr(".text12", 1));
+
 const gradientElement = document.querySelector("#gradient1");
 
 const red = 228;
@@ -82,89 +133,86 @@ function startGradientEffect() {
 
   // Start the motion handler
   startMotionHandler((x, y) => {
-    // Normalize and scale tilt values
-    const normalizedX = x / 45; // Adjust to make changes more noticeable
-    const normalizedY = y / 45; // Adjust to make changes more noticeable
-    const angle = Math.atan2(normalizedY, normalizedX) * (180 / Math.PI);
-    // shadow adjustments
-    // const svgElement = document.querySelector("#svglogo");
-    // const shadowOffsetX = Math.round(Math.cos((angle * Math.PI) / 180) * 10); // Scale as needed
-    // const shadowOffsetY = Math.round(Math.sin((angle * Math.PI) / 180) * 10); // Scale as needed
-    // svgElement.style.filter = `drop-shadow(${shadowOffsetX}px ${shadowOffsetY}px 10px rgba(0, 0, 0, 0.5))`;
-    // uptil here
-    // Define base colors for the gradient (vibrant colors)
-    const baseColor1 = { r: 255, g: 120, b: 90 }; // Vibrant red-orange
-    const baseColor2 = { r: 90, g: 180, b: 255 }; // Sky blue
-    const baseColor3 = { r: 120, g: 255, b: 150 }; // Bright green
-    const baseColor4 = { r: 255, g: 240, b: 120 }; // Vibrant yellow
+    // Normalize and scale tilt values for noticeable changes
+    const normalizedX = x / 25; // Moderate sensitivity
+    const normalizedY = y / 25;
 
-    // Amplify color changes for better visibility
+    const angle = Math.atan2(normalizedY, normalizedX) * (180 / Math.PI);
+
+    // Apply drop shadow adjustments
+    const svgElement = document.querySelector("#svglogo");
+    const shadowOffsetX = Math.round(Math.cos((angle * Math.PI) / 180) * 15); // Increased scale
+    const shadowOffsetY = Math.round(Math.sin((angle * Math.PI) / 180) * 15);
+    svgElement.style.filter = `drop-shadow(${shadowOffsetX}px ${shadowOffsetY}px 10px rgba(0, 0, 0, 0.5))`;
+
+    // Amplify offset shifts for smooth blending
+    const offset1 = Math.max(0, 10 + normalizedX * 10); // Offset for stop 1
+    const offset2 = Math.max(0, 30 + normalizedY * 10); // Offset for stop 2
+    const offset3 = Math.max(0, 50 + normalizedX * 10); // Offset for stop 3
+    const offset4 = Math.max(0, 70 + normalizedY * 10); // Offset for stop 4
+    const offset5 = 100; // Final stop stays at 100%
+
+    // Adjust colors for better blending
     const color1 = {
-      r: Math.min(255, baseColor1.r + normalizedX * 100),
-      g: Math.min(255, baseColor1.g + normalizedY * 100),
-      b: Math.max(0, baseColor1.b - normalizedX * 80),
+      r: Math.max(0, Math.min(255, 228 + normalizedX * 30 - normalizedY * 20)),
+      g: Math.max(0, Math.min(255, 14 + normalizedY * 40 - normalizedX * 20)),
+      b: Math.max(0, Math.min(255, 14 + normalizedX * 20 + normalizedY * 10)),
     };
 
     const color2 = {
-      r: Math.max(0, baseColor2.r - normalizedY * 90),
-      g: Math.min(255, baseColor2.g + normalizedX * 80),
-      b: Math.min(255, baseColor2.b + normalizedY * 100),
+      r: Math.max(0, Math.min(255, 9 + normalizedY * 30 + normalizedX * 20)),
+      g: Math.max(0, Math.min(255, 235 - normalizedX * 30 + normalizedY * 40)),
+      b: Math.max(0, Math.min(255, 156 + normalizedX * 20 - normalizedY * 30)),
     };
 
     const color3 = {
-      r: Math.min(255, baseColor3.r + normalizedY * 90),
-      g: Math.max(0, baseColor3.g - normalizedX * 100),
-      b: Math.min(255, baseColor3.b + normalizedX * 80),
+      r: Math.max(0, Math.min(255, 32 - normalizedY * 20 + normalizedX * 40)),
+      g: Math.max(0, Math.min(255, 18 + normalizedX * 30 - normalizedY * 20)),
+      b: Math.max(0, Math.min(255, 229 + normalizedY * 30 + normalizedX * 10)),
     };
 
     const color4 = {
-      r: Math.min(255, baseColor4.r + normalizedX * 50),
-      g: Math.min(255, baseColor4.g + normalizedY * 50),
-      b: Math.max(0, baseColor4.b - normalizedY * 50),
+      r: Math.max(0, Math.min(255, 192 + normalizedX * 20 + normalizedY * 20)),
+      g: Math.max(0, Math.min(255, 168 - normalizedY * 30 + normalizedX * 30)),
+      b: Math.max(0, Math.min(255, 168 + normalizedX * 30 - normalizedY * 10)),
     };
 
-    // Amplify offset shifts for more noticeable 3D motion
-    const offset1 = 20 + normalizedX * 20; // Offset for stop 1
-    const offset2 = 40 + normalizedY * 20; // Offset for stop 2
-    const offset3 = 60 + normalizedX * 20; // Offset for stop 3
-    const offset4 = 80 + normalizedY * 20; // Offset for stop 4
+    const color5 = {
+      r: Math.max(0, Math.min(255, 6 + normalizedY * 40 - normalizedX * 20)),
+      g: Math.max(0, Math.min(255, 54 + normalizedX * 20 + normalizedY * 30)),
+      b: Math.max(0, Math.min(255, 5 + normalizedY * 20 + normalizedX * 40)),
+    };
 
-    // Update gradient stops with new colors and offsets
+    // Update gradient stops with smooth blending
     gradientElement.children[0].setAttribute(
       "style",
-      `stop-color: rgba(${color1.r}, ${color1.g}, ${color1.b}, 1); stop-opacity: 1;`
+      `stop-color: rgba(${color1.r}, ${color1.g}, ${color1.b}, 0.9); stop-opacity: 1;`
     );
-    gradientElement.children[0].setAttribute(
-      "offset",
-      `${Math.min(100, offset1)}%`
-    );
+    gradientElement.children[0].setAttribute("offset", `${offset1}%`);
 
     gradientElement.children[1].setAttribute(
       "style",
-      `stop-color: rgba(${color2.r}, ${color2.g}, ${color2.b}, 1); stop-opacity: 0.9;`
+      `stop-color: rgba(${color2.r}, ${color2.g}, ${color2.b}, 0.9); stop-opacity: 1;`
     );
-    gradientElement.children[1].setAttribute(
-      "offset",
-      `${Math.min(100, offset2)}%`
-    );
+    gradientElement.children[1].setAttribute("offset", `${offset2}%`);
 
     gradientElement.children[2].setAttribute(
       "style",
-      `stop-color: rgba(${color3.r}, ${color3.g}, ${color3.b}, 1); stop-opacity: 0.8;`
+      `stop-color: rgba(${color3.r}, ${color3.g}, ${color3.b}, 0.9); stop-opacity: 1;`
     );
-    gradientElement.children[2].setAttribute(
-      "offset",
-      `${Math.min(100, offset3)}%`
-    );
+    gradientElement.children[2].setAttribute("offset", `${offset3}%`);
 
     gradientElement.children[3].setAttribute(
       "style",
-      `stop-color: rgba(${color4.r}, ${color4.g}, ${color4.b}, 1); stop-opacity: 0.7;`
+      `stop-color: rgba(${color4.r}, ${color4.g}, ${color4.b}, 0.9); stop-opacity: 1;`
     );
-    gradientElement.children[3].setAttribute(
-      "offset",
-      `${Math.min(100, offset4)}%`
+    gradientElement.children[3].setAttribute("offset", `${offset4}%`);
+
+    gradientElement.children[4].setAttribute(
+      "style",
+      `stop-color: rgba(${color5.r}, ${color5.g}, ${color5.b}, 0.9); stop-opacity: 1;`
     );
+    gradientElement.children[4].setAttribute("offset", `${offset5}%`);
   });
 }
 
@@ -176,32 +224,36 @@ function calculatePosition(degree, radius) {
   };
 }
 
-function moveText(element, startDegree, endDegree, duration) {
-  const radius = 300; // Radius of the circle-container
-  const startPos = calculatePosition(startDegree, radius);
-  const endPos = calculatePosition(endDegree, radius);
-  const keyframes = [
-    {
-      transform: `translate(${startPos.x}px, ${startPos.y}px) rotate(30deg)`,
-    },
-    {
-      transform: `translate(${endPos.x}px, ${endPos.y}px) rotate(30deg)`,
-    },
-  ];
-  element.animate(keyframes, {
-    duration: duration,
-    iterations: Infinity,
-    easing: "linear",
-  });
-}
+// function moveText(element, startDegree, endDegree, duration) {
+//   const radius = 300; // Radius of the circle-container
+//   const startPos = calculatePosition(startDegree, radius);
+//   const endPos = calculatePosition(endDegree, radius);
+//   const keyframes = [
+//     {
+//       transform: `translate(${startPos.x}px, ${startPos.y}px) rotate(30deg)`,
+//     },
+//     {
+//       transform: `translate(${endPos.x}px, ${endPos.y}px) rotate(30deg)`,
+//     },
+//   ];
+//   element.animate(keyframes, {
+//     duration: duration,
+//     iterations: Infinity,
+//     easing: "linear",
+//   });
+// }
 
 document.addEventListener("DOMContentLoaded", () => {
-  moveText(document.querySelector(".text5"), 285, 72, 10000);
-  moveText(document.querySelector(".text4"), 85, 275, 10000);
-  moveText(document.querySelector(".text1"), 255, 105, 10000);
-  moveText(document.querySelector(".text6"), 260, 100, 10000);
-  moveText(document.querySelector(".text3"), 105, 255, 10000);
-  moveText(document.querySelector(".text2"), 125, 235, 10000);
+  moveText(document.querySelector(".text1"), 269, 89, 10000);
+  moveText(document.querySelector(".text2"), 94, 270, 10000);
+  moveText(document.querySelector(".text3"), 279, 98, 10000);
+  moveText(document.querySelector(".text4"), 260, 100, 10000);
+  moveText(document.querySelector(".text5"), 105, 255, 10000);
+  moveText(document.querySelector(".text6"), 125, 235, 10000);
+  moveText(document.querySelector(".text7"), 125, 235, 10000);
+  moveText(document.querySelector(".text8"), 125, 235, 10000);
+  moveText(document.querySelector(".text9"), 125, 235, 10000);
+  moveText(document.querySelector(".text10"), 125, 235, 10000);
 });
 
 //vanta elm design
