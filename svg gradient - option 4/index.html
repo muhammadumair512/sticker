@@ -5,14 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>SVG Gradient Tilt Effect</title>
     <link rel="stylesheet" href="styles.css" />
-    <style></style>
+    <script src="https://cdn.jsdelivr.net/gh/peterhry/CircleType@2.3.1/dist/circletype.min.js"></script>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
     <!-- Latest Vanta.js Waves -->
     <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.waves.min.js"></script>
   </head>
   <body>
     <div id="containerAll">
-      <div onclick="initializeMotionAccess()" class="overlay">CLICK HERE</div>
+      <div
+        onclick="initializeMotionAccess(); requestPermissionForiOS()"
+        class="overlay"
+      >
+        CLICK HERE
+      </div>
       <div>
         <svg
           class="containerSvg svg1"
@@ -138,47 +144,11 @@
           />
         </svg>
       </div>
-      <div>
-        <svg class="bendtextcontainer" viewBox="0 0 300 150">
-          <defs>
-            <path id="curve" d="M 10 140 A 140 140 0 0 1 290 140" />
-            <!-- <path id="curve" d="M 50 150 A 100 100 0 0 1 250 150" /> -->
-          </defs>
-          <text
-            class="bendtext"
-            fill="black"
-            font-size="20"
-            font-family="Inter"
-            font-weight="bold"
-          >
-            <textPath href="#curve" startOffset="50%" text-anchor="middle">
-              7452369854
-            </textPath>
-          </text>
-        </svg>
-      </div>
-      <div class="bendtextcontainer2">
-        <svg viewBox="0 0 300 150">
-          <defs>
-            <!-- Flipped curve -->
-            <path id="inverted-curve" d="M 50 50 A 100 100 0 0 0 250 50" />
-          </defs>
-          <text
-            class="bendtext"
-            fill="black"
-            font-size="20"
-            font-family="Inter"
-            font-weight="bold"
-          >
-            <textPath
-              href="#inverted-curve"
-              startOffset="50%"
-              text-anchor="middle"
-            >
-              7452369854
-            </textPath>
-          </text>
-        </svg>
+      <div class="circle">
+        <div class="text" id="text">
+          7412589635 &#x2022; 7412589635 &#x2022; 7412589635 &#x2022; 7412589635
+          &#x2022;
+        </div>
       </div>
       <div>
         <?xml version="1.0" encoding="UTF-8"?>
@@ -197,7 +167,7 @@
           <defs>
             <style>
               .cls-1 {
-                fill: #da9694;
+                fill: #0ae2ac;
                 width: 150px;
                 height: 150px;
               }
@@ -215,40 +185,6 @@
             />
           </g>
         </svg>
-      </div>
-
-      <div class="circle-container" id="circle-container">
-        <!-- Text elements with individual animations for unique paths and delays -->
-        <div class="marquee-text text1">
-          7412589635 &#x2022; 7412589635 &#x2022; 7412589635 &#x2022;7412589635
-          &#x2022;7412589635 &#x2022;7412589635 &#x2022;7412589635
-          &#x2022;7412589635 &#x2022;7412589635 &#x2022;
-        </div>
-        <div class="marquee-text text2">
-          7412589635 &#x2022; 7412589635 &#x2022; 7412589635 &#x2022;7412589635
-          &#x2022;7412589635 &#x2022;7412589635 &#x2022;7412589635
-          &#x2022;7412589635 &#x2022;7412589635 &#x2022;
-        </div>
-        <div class="marquee-text text3">
-          7412589635 &#x2022; 7412589635 &#x2022; 7412589635 &#x2022;7412589635
-          &#x2022;7412589635 &#x2022;7412589635 &#x2022;7412589635
-          &#x2022;7412589635 &#x2022;7412589635 &#x2022;
-        </div>
-        <div class="marquee-text text4">
-          7412589635 &#x2022; 7412589635 &#x2022; 7412589635 &#x2022;7412589635
-          &#x2022;7412589635 &#x2022;7412589635 &#x2022;7412589635
-          &#x2022;7412589635 &#x2022;7412589635 &#x2022;
-        </div>
-        <div class="marquee-text text5">
-          7412589635 &#x2022; 7412589635 &#x2022; 7412589635 &#x2022;7412589635
-          &#x2022;7412589635 &#x2022;7412589635 &#x2022;7412589635
-          &#x2022;7412589635 &#x2022;7412589635 &#x2022;
-        </div>
-        <div class="marquee-text text6">
-          7412589635 &#x2022; 7412589635 &#x2022; 7412589635 &#x2022;7412589635
-          &#x2022;7412589635 &#x2022;7412589635 &#x2022;7412589635
-          &#x2022;7412589635 &#x2022;7412589635 &#x2022;
-        </div>
       </div>
 
       <div>
@@ -287,7 +223,7 @@
             <g clip-path="url(#743701e273)">
               <g clip-path="url(#88a675f3b1)">
                 <path
-                  fill="#3a6d65"
+                  fill="#138d6f"
                   d="M -22.867188 241.402344 L 41.578125 -22.886719 L 305.867188 41.558594 L 241.421875 305.847656 Z M -22.867188 241.402344 "
                   fill-opacity="1"
                   fill-rule="nonzero"
@@ -297,6 +233,7 @@
           </g>
         </svg>
       </div>
+      <div class="glassmorphism"></div>
       <div id="circle-elm"></div>
     </div>
 

@@ -30,6 +30,8 @@ const multBeta = 0.7;
 const colorMultiplier = 3;
 
 function initializeMotionAccess() {
+  requestPermissionForiOS();
+
   const circle = document.querySelector(".overlay");
   circle.style.display = "none";
   if (typeof DeviceMotionEvent.requestPermission === "function") {
@@ -175,34 +177,66 @@ function calculatePosition(degree, radius) {
     y: radius * Math.sin(radians),
   };
 }
+function updateGradient(tiltX, tiltY) {
+  const gradientCircle = document.querySelector(".gradient-circle");
 
-function moveText(element, startDegree, endDegree, duration) {
-  const radius = 300; // Radius of the circle-container
-  const startPos = calculatePosition(startDegree, radius);
-  const endPos = calculatePosition(endDegree, radius);
-  const keyframes = [
-    {
-      transform: `translate(${startPos.x}px, ${startPos.y}px) rotate(30deg)`,
-    },
-    {
-      transform: `translate(${endPos.x}px, ${endPos.y}px) rotate(30deg)`,
-    },
-  ];
-  element.animate(keyframes, {
-    duration: duration,
-    iterations: Infinity,
-    easing: "linear",
-  });
+  // Adjust sensitivity by scaling tilt values
+  const angleX = (Math.min(Math.max(tiltX, -90), 90) + 90) * 1.5;
+  const angleY = (Math.min(Math.max(tiltY, -90), 90) + 90) * 1.5;
+  const angle = (angleX * 0.7 + angleY * 0.3) % 360;
+
+  gradientCircle.style.background = `
+radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.3) 25%, rgba(255, 255, 255, 0.1) 50%, rgba(255, 255, 255, 0) 75%) 50% 50%,
+radial-gradient(circle at 50% 50%, rgba(240, 230, 140, 0.3) 0%, rgba(250, 250, 210, 0.2) 30%, rgba(240, 230, 140, 0) 70%) 50% 50%,
+linear-gradient(${angle}deg, rgba(255, 154, 158, 0.7), rgba(250, 208, 196, 0.7), rgba(212, 252, 121, 0.7), rgba(150, 230, 161, 0.7), rgba(146, 169, 255, 0.7), rgba(255, 154, 158, 0.7))
+`;
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-  moveText(document.querySelector(".text5"), 285, 72, 10000);
-  moveText(document.querySelector(".text4"), 85, 275, 10000);
-  moveText(document.querySelector(".text1"), 255, 105, 10000);
-  moveText(document.querySelector(".text6"), 260, 100, 10000);
-  moveText(document.querySelector(".text3"), 105, 255, 10000);
-  moveText(document.querySelector(".text2"), 125, 235, 10000);
-});
+// Request permission for motion and orientation on iOS
+function requestPermissionForiOS() {
+  if (typeof DeviceOrientationEvent.requestPermission === "function") {
+    DeviceOrientationEvent.requestPermission()
+      .then((permissionState) => {
+        if (permissionState === "granted") {
+          window.addEventListener("deviceorientation", handleOrientation);
+          document.getElementById("request-permission").style.display = "none";
+        } else {
+          alert("Permission to access motion data was denied.");
+        }
+      })
+      .catch(console.error);
+  } else {
+    // If not iOS, add the event listener directly
+    window.addEventListener("deviceorientation", handleOrientation);
+  }
+}
+
+function handleOrientation(event) {
+  const { beta, gamma } = event; // tilt front/back and left/right
+  if (beta !== null && gamma !== null) {
+    updateGradient(gamma, beta);
+  }
+}
+
+// Check for iOS and show the permission request button if needed
+if (typeof DeviceOrientationEvent.requestPermission === "function") {
+  // document.getElementById("request-permission").style.display = "block";
+  document
+    .getElementById("request-permission")
+    .addEventListener("click", requestPermissionForiOS);
+} else {
+  // Directly add the event listener on non-iOS devices
+  window.addEventListener("deviceorientation", handleOrientation);
+}
+
+// circle script
+// const text = document.querySelector(".text p");
+// text.innerHTML = text.innerText
+//   .split("")
+//   .map(
+//     (char, i) => `<span style="transform:rotate(${i * 7}deg); ">${char}</span>`
+//   )
+//   .join("");
 
 //vanta elm design
 document.addEventListener("DOMContentLoaded", function () {
@@ -225,3 +259,17 @@ document.addEventListener("DOMContentLoaded", function () {
     console.error("Vanta initialization error:", error);
   }
 });
+
+// rotating circle
+const circleType = new CircleType(document.getElementById("text"));
+
+// Set the text radius and direction. Note: setter methods are chainable.
+circleType.radius(10).dir(1);
+
+// Provide your own splitter function to handle emojis
+// @see https://github.com/orling/grapheme-splitter
+const splitter = new GraphemeSplitter();
+new CircleType(
+  document.getElementById("text"),
+  splitter.splitGraphemes.bind(splitter)
+);

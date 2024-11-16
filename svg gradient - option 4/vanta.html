@@ -3,45 +3,47 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vanta Waves Debug</title>
-    <!-- Latest Three.js -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
-    <!-- Latest Vanta.js Waves -->
-    <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.waves.min.js"></script>
-    <style>
-      #circle-elm {
-        width: 100px; /* Full viewport width */
-        height: 100px;
-        border-radius: 50%;
-        overflow: hidden;
-        position: absolute;
-      }
-    </style>
+    <title>Rotating Circle with CircleType</title>
+    <link rel="stylesheet" href="styles.css" />
+    <style></style>
   </head>
   <body>
-    <div id="circle-elm"></div>
-
-    <script>
-      document.addEventListener("DOMContentLoaded", function () {
-        try {
-          VANTA.WAVES({
-            el: "#circle-elm",
-            mouseControls: true,
-            touchControls: true,
-            gyroControls: false,
-            minHeight: 200.0,
-            minWidth: 200.0,
-            scale: 1.0,
-            scaleMobile: 1.0,
-            color: 0x1e90ff, // Example: Blue waves
-            shininess: 50,
-            waveHeight: 20,
-            waveSpeed: 1,
-          });
-        } catch (error) {
-          console.error("Vanta initialization error:", error);
+    <style>
+      @keyframes rotateCircle {
+        0% {
+          transform: rotate(0deg);
         }
-      });
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+
+      #demo3 {
+        position: absolute;
+        margin: auto auto auto 25%;
+        animation: rotateCircle 10s linear infinite;
+      }
+    </style>
+    <div id="demo3">
+      7412589635 &#x2022; 7412589635 &#x2022; 7412589635 &#x2022; 7412589635
+      &#x2022;
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/gh/peterhry/CircleType@2.3.1/dist/circletype.min.js"></script>
+    <script>
+      // Instantiate `CircleType` with an HTML element.
+      const circleType = new CircleType(document.getElementById("demo3"));
+
+      // Set the text radius and direction. Note: setter methods are chainable.
+      circleType.radius(50).dir(1);
+
+      // Provide your own splitter function to handle emojis
+      // @see https://github.com/orling/grapheme-splitter
+      const splitter = new GraphemeSplitter();
+      new CircleType(
+        document.getElementById("demo3"),
+        splitter.splitGraphemes.bind(splitter)
+      );
     </script>
   </body>
 </html>
