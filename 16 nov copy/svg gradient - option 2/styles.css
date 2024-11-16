@@ -1,0 +1,155 @@
+.overlay {
+  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+  font-size: 26px;
+  color: white;
+  font-weight: 500;
+  position: absolute;
+  z-index: 30;
+  width: 100%;
+  top: 0;
+  left: 0;
+  height: 100%;
+  border-radius: 50%;
+  background-color: rgba(107, 128, 147, 0.452);
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  display: hidden;
+  /* color: rgb(5, 38, 253) */
+}
+#containerAll {
+  position: relative;
+  top: 0;
+  left: 0;
+  display: flex;
+  width: 300px;
+  height: 300px;
+}
+.containerSvg {
+  position: absolute;
+  z-index: -10;
+  margin: -0.6% auto auto 2.3%;
+  width: 98.3% !important;
+  height: 98.3% !important;
+}
+
+/* Apply styles for the SVG container */
+.gradient-circle {
+  width: 100%;
+  height: 100%;
+}
+
+.gradient-circle {
+  margin: 2.416% auto auto 2.416%;
+  position: absolute;
+  z-index: -14;
+  width: 95%;
+  height: 95%;
+  border-radius: 50%;
+  background: radial-gradient(
+        circle at 50% 50%,
+        rgba(255, 255, 255, 0.5) 0%,
+        rgba(255, 255, 255, 0.3) 25%,
+        rgba(255, 255, 255, 0.1) 50%,
+        rgba(255, 255, 255, 0) 75%
+      )
+      50% 50%,
+    radial-gradient(
+        circle at 50% 50%,
+        rgba(240, 230, 140, 0.3) 0%,
+        rgba(250, 250, 210, 0.2) 30%,
+        rgba(240, 230, 140, 0) 70%
+      )
+      50% 50%,
+    linear-gradient(
+      0deg,
+      rgba(255, 154, 158, 0.7),
+      rgba(250, 208, 196, 0.7),
+      rgba(212, 252, 121, 0.7),
+      rgba(150, 230, 161, 0.7),
+      rgba(146, 169, 255, 0.7),
+      rgba(255, 154, 158, 0.7)
+    );
+  background-blend-mode: screen;
+  animation: gradient-rotation 5s linear infinite;
+  transition: background 0.1s ease-out;
+}
+
+/* Desktop animation */
+@keyframes gradient-rotation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Styling for the permission button on iOS */
+
+/* circular text */
+
+.circle {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  /* background: radial-gradient(circle, #ff00ff, #00ffff, #ff0000); */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.logotext {
+  position: absolute;
+  height: 50%;
+  width: 50%;
+  margin: auto auto auto 3.3%;
+  /* background: url("./1-1.png"); */
+  background-size: cover;
+  border-radius: 50%;
+}
+.text {
+  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+  font-size: 20px;
+
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  animation: rotateText 10s linear infinite;
+}
+@keyframes rotateText {
+  0% {
+    transform: rotate(360deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+.text span {
+  position: absolute;
+  left: 50%;
+  top: -15%;
+  font-size: 1em;
+  transform-origin: 0 100px;
+}
+.svgborder {
+  position: absolute;
+  z-index: -15;
+  width: 100%;
+  height: 100%;
+  /* margin: -15px auto auto -12px; */
+}
+.svglogo {
+  width: 98.3%;
+  height: 98.3%;
+  position: absolute;
+  z-index: 5;
+  margin: auto auto auto 25%;
+
+  filter: drop-shadow(5px 5px 5px rgba(0, 0, 0, 0.5));
+  transition: filter 0.1s ease, background 0.1s ease;
+}
