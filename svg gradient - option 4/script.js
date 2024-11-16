@@ -89,10 +89,10 @@ function startGradientEffect() {
     const normalizedY = y / 45; // Adjust to make changes more noticeable
     const angle = Math.atan2(normalizedY, normalizedX) * (180 / Math.PI);
     // shadow adjustments
-    // const svgElement = document.querySelector("#svglogo");
-    // const shadowOffsetX = Math.round(Math.cos((angle * Math.PI) / 180) * 10); // Scale as needed
-    // const shadowOffsetY = Math.round(Math.sin((angle * Math.PI) / 180) * 10); // Scale as needed
-    // svgElement.style.filter = `drop-shadow(${shadowOffsetX}px ${shadowOffsetY}px 10px rgba(0, 0, 0, 0.5))`;
+    const svgElement = document.querySelector("#svglogo");
+    const shadowOffsetX = Math.round(Math.cos((angle * Math.PI) / 180) * 10); // Scale as needed
+    const shadowOffsetY = Math.round(Math.sin((angle * Math.PI) / 180) * 10); // Scale as needed
+    svgElement.style.filter = `drop-shadow(${shadowOffsetX}px ${shadowOffsetY}px 10px rgba(0, 0, 0, 0.5))`;
     // uptil here
     // Define base colors for the gradient (vibrant colors)
     const baseColor1 = { r: 255, g: 120, b: 90 }; // Vibrant red-orange

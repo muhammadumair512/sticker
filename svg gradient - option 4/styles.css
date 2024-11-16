@@ -136,22 +136,30 @@
 } */
 .glassmorphism {
   position: absolute;
-  background: rgba(255, 255, 255, 0.3); /* Transparent white background */
-  backdrop-filter: blur(20px); /* Apply blur to the background */
-  -webkit-backdrop-filter: blur(20px); /* Add compatibility for iOS Safari */
-  padding: 0; /* Set padding to 0 to avoid additional height */
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  background: rgba(255, 255, 255, 0.1); /* More transparent white background */
+  backdrop-filter: blur(20px) saturate(180%); /* Blur and increase vibrancy */
+  -webkit-backdrop-filter: blur(20px) saturate(180%); /* iOS Safari compatibility */
+  padding: 0; /* Avoid extra height */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
   text-align: center;
   width: 124px;
   height: 30px !important;
   margin: 40% auto auto 8.5%;
   z-index: -14;
 
-  /* Border radius for all corners */
+  /* Smooth corner radius */
   border-radius: 7px;
 
-  /* Fallback for devices without backdrop-filter support */
-  background-color: rgba(255, 255, 255, 0.7); /* Slightly opaque fallback */
+  /* Fallback for unsupported devices */
+  background-color: rgba(255, 255, 255, 0.2); /* More transparent fallback */
+  border: 1px solid rgba(255, 255, 255, 0.3); /* Add a subtle border for clarity */
+
+  /* Optional gradient for unsupported browsers */
+  background-image: linear-gradient(
+    to top left,
+    rgba(255, 255, 255, 0.2),
+    rgba(255, 255, 255, 0.1)
+  );
 }
 
 .circle {
