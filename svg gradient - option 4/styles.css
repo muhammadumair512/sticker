@@ -136,9 +136,9 @@
 } */
 .glassmorphism {
   position: absolute;
-  background: rgba(255, 255, 255, 0.1); /* More transparent white background */
-  backdrop-filter: blur(20px) saturate(180%); /* Blur and increase vibrancy */
-  -webkit-backdrop-filter: blur(20px) saturate(180%); /* iOS Safari compatibility */
+  background: rgba(255, 255, 255, 1);
+  backdrop-filter: blur(1px) saturate(1%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
   padding: 0; /* Avoid extra height */
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
   text-align: center;
