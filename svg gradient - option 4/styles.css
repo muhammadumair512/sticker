@@ -139,8 +139,8 @@
   background: rgb(14, 158, 225);
   backdrop-filter: blur(1px) saturate(1%);
   -webkit-backdrop-filter: blur(1px) saturate(1%);
-  padding: 0; /* Avoid extra height */
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  padding: 0;
+  box-shadow: 0 4px 6px rgba(94, 198, 239, 0.9);
   text-align: center;
   width: 124px;
   height: 30px !important;
