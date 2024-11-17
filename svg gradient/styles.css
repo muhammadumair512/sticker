@@ -18,7 +18,7 @@
   position: absolute;
   z-index: 5;
   margin: -42% auto auto 3%;
-  filter: drop-shadow(5px 5px 5px rgba(0, 0, 0, 0.5));
+  filter: drop-shadow(5px 5px 5px rgba(0, 0, 0, 0.7));
   transition: filter 0.1s ease, background 0.1s ease;
 }
 .containerSvg {
