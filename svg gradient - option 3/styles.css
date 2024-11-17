@@ -31,6 +31,7 @@
   z-index: -10;
   top: 0;
   left: 0;
+  margin: 1.8% auto auto 3%;
 }
 
 /* Apply styles for the SVG container */
@@ -142,6 +143,7 @@ svg {
   transition: filter 0.1s ease, background 0.1s ease;
 }
 .logo {
+  display: none;
   position: absolute;
   height: 50%;
   width: 50%;
