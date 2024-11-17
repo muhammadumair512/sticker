@@ -1,3 +1,6 @@
+window.addEventListener("load", () => {
+  RotateText();
+});
 const gradientElements = document.querySelectorAll("#gradient1");
 
 const red = 228;
@@ -83,28 +86,23 @@ function startMotionHandler(onMotionUpdate) {
 function startGradientEffect() {
   const gradientElements = document.querySelectorAll("#gradient1");
 
-  // Start the motion handler
   startMotionHandler((x, y) => {
-    // Normalize and scale tilt values for noticeable changes
     const normalizedX = x / 25; // Moderate sensitivity
     const normalizedY = y / 25;
 
     const angle = Math.atan2(normalizedY, normalizedX) * (180 / Math.PI);
 
-    // Apply drop shadow adjustments
     const svgElement = document.querySelector("#svglogo");
     const shadowOffsetX = Math.round(Math.cos((angle * Math.PI) / 180) * 15); // Increased scale
     const shadowOffsetY = Math.round(Math.sin((angle * Math.PI) / 180) * 15);
     svgElement.style.filter = `drop-shadow(${shadowOffsetX}px ${shadowOffsetY}px 10px rgba(0, 0, 0, 0.5))`;
 
-    // Amplify offset shifts for smooth blending
     const offset1 = Math.max(0, 10 + normalizedX * 10); // Offset for stop 1
     const offset2 = Math.max(0, 30 + normalizedY * 10); // Offset for stop 2
     const offset3 = Math.max(0, 50 + normalizedX * 10); // Offset for stop 3
     const offset4 = Math.max(0, 70 + normalizedY * 10); // Offset for stop 4
     const offset5 = 100; // Final stop stays at 100%
 
-    // Adjust colors for better blending
     const color1 = {
       r: Math.max(0, Math.min(255, 228 + normalizedX * 30 - normalizedY * 20)),
       g: Math.max(0, Math.min(255, 14 + normalizedY * 40 - normalizedX * 20)),
@@ -135,7 +133,6 @@ function startGradientEffect() {
       b: Math.max(0, Math.min(255, 5 + normalizedY * 20 + normalizedX * 40)),
     };
 
-    // Update gradient stops for each gradient element
     gradientElements.forEach((gradientElement) => {
       gradientElement.children[0].setAttribute(
         "style",
@@ -180,13 +177,9 @@ function calculatePosition(degree, radius) {
   };
 }
 
-// gradient circle
-
-// Function to update gradient based on device tilt with increased sensitivity
 function updateGradient(tiltX, tiltY) {
   const gradientCircle = document.querySelector(".gradient-circle");
 
-  // Adjust sensitivity by scaling tilt values
   const angleX = (Math.min(Math.max(tiltX, -90), 90) + 90) * 1.5;
   const angleY = (Math.min(Math.max(tiltY, -90), 90) + 90) * 1.5;
   const angle = (angleX * 0.7 + angleY * 0.3) % 360;
@@ -198,7 +191,6 @@ linear-gradient(${angle}deg, rgba(255, 154, 158, 0.7), rgba(250, 208, 196, 0.7),
 `;
 }
 
-// Request permission for motion and orientation on iOS
 function requestPermissionForiOS() {
   if (typeof DeviceOrientationEvent.requestPermission === "function") {
     DeviceOrientationEvent.requestPermission()
@@ -212,13 +204,12 @@ function requestPermissionForiOS() {
       })
       .catch(console.error);
   } else {
-    // If not iOS, add the event listener directly
     window.addEventListener("deviceorientation", handleOrientation);
   }
 }
 
 function handleOrientation(event) {
-  const { beta, gamma } = event; // tilt front/back and left/right
+  const { beta, gamma } = event;
   if (beta !== null && gamma !== null) {
     updateGradient(gamma, beta);
   }
@@ -235,16 +226,17 @@ if (typeof DeviceOrientationEvent.requestPermission === "function") {
   window.addEventListener("deviceorientation", handleOrientation);
 }
 
-// circle scrip
-function RevolvingText() {
-  const logo = document.querySelector(".logo");
-  logo.style.display = "block";
-  const text = document.querySelector(".text p");
-  text.innerHTML = text.innerText
-    .split("")
-    .map(
-      (char, i) => `<span style="transform:rotate(${i * 7}deg)">${char}</span>`
-    )
-    .join("");
+function RotateText() {
+  const elm = document.querySelector("#text");
+  elm.style.display = "block";
+  const circleType = new CircleType(document.getElementById("text"));
+
+  circleType.radius(45).dir(1);
+
+  // @see https://github.com/orling/grapheme-splitter
+  const splitter = new GraphemeSplitter();
+  new CircleType(
+    document.getElementById("text"),
+    splitter.splitGraphemes.bind(splitter)
+  );
 }
-// RevolvingText();

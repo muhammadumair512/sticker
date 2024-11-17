@@ -8,23 +8,22 @@
   display: flex;
   width: 150px;
   height: 150px;
-  /* border: solid 5px blue; */
 
   border-radius: 50%;
 }
 .svglogo {
-  width: 130%;
+  width: 180%;
   overflow: hidden;
-  height: 130%;
+  height: 180%;
   position: absolute;
   z-index: 5;
-  margin: -16% auto auto 16%;
+  margin: -42% auto auto 3%;
   filter: drop-shadow(5px 5px 5px rgba(0, 0, 0, 0.5));
   transition: filter 0.1s ease, background 0.1s ease;
 }
 .containerSvg {
   position: absolute;
-  z-index: -10;
+  z-index: -5;
   top: 0;
   left: 0;
 }
@@ -35,7 +34,6 @@
   margin: 2.6% auto auto 26.6%;
 }
 
-/* Apply styles for the SVG container */
 .gradient-circle {
   width: 100%;
   height: 100%;
@@ -43,25 +41,18 @@
 .svg1 {
   width: 100%;
   height: 100%;
-  /* margin: -5% auto auto -16%; */
 }
 
-/* The request-permission button for iOS */
-
-/* diagonal text move */
-/* Circle container styling */
 .circle-container {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  transform: rotate(20deg); /* align-items: center; */
-  /* align-content: space-between; */
+  transform: rotate(20deg);
   position: absolute;
-  z-index: -20;
+  z-index: -4;
   width: 81%;
   height: 81%;
   margin: 12% auto auto 9%;
-  /* background-color: lightgray; */
   border-radius: 50%;
   overflow: hidden;
 }
@@ -85,7 +76,6 @@
   align-items: center;
   display: hidden;
 }
-/* Common styling for marquee texts */
 .marquee-text {
   position: relative;
   font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
@@ -98,9 +88,8 @@
 
 /* vanta elm */
 #circle-elm {
-  /* color: #1e8fffc5; */
   position: absolute;
-  z-index: -25;
+  z-index: -5;
   width: 78%;
   height: 78%;
   margin: 12.5% auto auto 11.5%;
@@ -109,15 +98,12 @@
 }
 .border {
   position: absolute;
-  z-index: -26;
-  /* width: 140%; */
-  /* height: 140%; */
+  z-index: -6;
+
   margin: 1% auto auto 0%;
-  /* border-radius: 50%; */
   overflow: hidden;
 }
 
-/* marquee new */
 .marquee-text h7 {
   font-size: 1em;
   white-space: nowrap;
@@ -128,6 +114,3 @@
 
   display: flex;
 }
-/* p {
-  color: #25e2c2;
-} */

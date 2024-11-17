@@ -9,16 +9,20 @@
   width: 150px;
   height: 150px;
 }
+
 .svglogo {
+  width: 120%;
+  overflow: hidden;
+  height: 120%;
   position: absolute;
   z-index: 5;
-  margin: auto auto auto -5%;
+  margin: -10% auto auto 17%;
   filter: drop-shadow(5px 5px 5px rgba(0, 0, 0, 0.5));
   transition: filter 0.1s ease, background 0.1s ease;
 }
 .containerSvg {
   position: absolute;
-  z-index: -10;
+  z-index: 5;
   top: 0;
   left: 0;
 }
@@ -34,23 +38,12 @@
   width: 100%;
   height: 100%;
 }
-#svglogo {
-  width: 96.6%;
-  height: 96.6%;
-  margin: auto;
-  margin-left: 25.6%;
-  /* margin-top: 0.6%; */
-}
+
 .svg1 {
   width: 100%;
   height: 100%;
   margin: 0% auto auto -0%;
 }
-
-/* The request-permission button for iOS */
-
-/* diagonal text move */
-/* Circle container styling */
 
 .overlay {
   font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
@@ -72,21 +65,13 @@
   display: hidden;
 }
 /* Common styling for marquee texts */
-.marquee-text {
-  position: relative;
-  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
-  font-size: 20px;
-
-  white-space: nowrap;
-  color: rgba(18, 1, 1, 0.206);
-}
 
 /* vanta elm */
 #circle-elm {
   /* color: #1e8fffc5; */
   background-color: rgba(0, 255, 255, 0.3);
   position: absolute;
-  z-index: -25;
+  z-index: -4;
   width: 83.3%;
   height: 83.3%;
   margin: 8.3% auto auto 8.3%;
@@ -96,7 +81,7 @@
 }
 #border {
   position: absolute;
-  z-index: -26;
+  z-index: -6;
   width: 110%;
   height: 110%;
   margin: -5.3% auto auto -5.6%;
@@ -111,6 +96,7 @@
   margin-top: -8%;
 }
 .bendtextcontainer2 {
+  z-index: 2;
   position: absolute;
   height: 50%;
   width: 100%;
@@ -132,10 +118,9 @@
 .bendtext {
   animation: flicker 1.5s infinite;
 }
-/* p {
-  color: #138d6f;
-} */
+
 .glassmorphism {
+  z-index: 1;
   position: absolute;
   background: rgb(14, 158, 225);
   backdrop-filter: blur(1px) saturate(1%);
@@ -143,12 +128,13 @@
   padding: 0;
   box-shadow: 0 4px 6px rgba(94, 198, 239, 0.9);
   text-align: center;
-  width: 124px;
-  height: 30px !important;
-  margin: 40% auto auto 8.5%;
-  z-index: -14;
+  width: 130px;
+  height: 28px !important;
+  margin: 40.5% auto auto 6.5%;
+
   background-color: rgba(255, 255, 255, 0.7); /* More transparent fallback */
-  border: 1px solid rgba(255, 255, 255, 0.7); /* Add a subtle border for clarity */
+  border-top: 1px black solid;
+  border-bottom: 1px black solid;
 
   /* Optional gradient for unsupported browsers */
   background-image: linear-gradient(
@@ -156,14 +142,10 @@
     rgba(255, 255, 255, 0.2),
     rgba(255, 255, 255, 0.1)
   );
-  border-top-left-radius: 7px;
-  border-top-right-radius: 7px;
-  border-bottom-left-radius: 7px;
-  border-bottom-right-radius: 7px;
 }
 
 .circle {
-  z-index: -15;
+  z-index: -2;
   position: absolute;
   width: 148px;
   height: 148px;
@@ -173,17 +155,6 @@
   align-items: center;
   margin: 1px auto auto 1px;
 }
-/* 
-.logo {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: absolute;
-  height: 50%;
-  width: 50%;
-  background-size: cover;
-  border-radius: 50%;
-} */
 
 @keyframes rotateCircle {
   0% {
@@ -195,14 +166,23 @@
 }
 
 #text {
+  word-spacing: 10px;
   color: rgba(18, 1, 1, 0.55);
   display: none;
-  /* font-size: small; */
-  font-size: 12.2px;
+  font-size: 10px;
 
   position: absolute;
   margin: auto auto auto auto;
   z-index: -14;
 
   animation: rotateCircle 10s linear infinite;
+}
+.narrowBorder {
+  position: absolute;
+  z-index: 2;
+  width: 95%;
+  height: 95%;
+  margin: 2% auto auto 2.5%;
+  border-radius: 50%;
+  border: solid 9px #138d6f;
 }

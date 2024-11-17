@@ -5,12 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>SVG Gradient Tilt Effect</title>
     <link rel="stylesheet" href="styles.css" />
-    <style></style>
+    <script src="https://cdn.jsdelivr.net/gh/peterhry/CircleType@2.3.1/dist/circletype.min.js"></script>
   </head>
   <body>
     <div id="containerAll">
       <div
-        onclick="initializeMotionAccess(); requestPermissionForiOS(); RevolvingText()"
+        onclick="initializeMotionAccess(); requestPermissionForiOS()"
         class="overlay"
       >
         CLICK HERE
@@ -91,7 +91,7 @@
           <defs>
             <style>
               .cls-1 {
-                fill: #0ae2ac;
+                fill: #656565;
                 stroke-width: 0px;
               }
             </style>
@@ -111,13 +111,9 @@
       </div>
       <div class="gradient-circle"></div>
       <div class="circle">
-        <div class="logo">
-          <div class="text">
-            <p>
-              7412589635 &#x2022; 7412589635 &#x2022; 7412589635 &#x2022;
-              7412589635 &#x2022;
-            </p>
-          </div>
+        <div class="text" id="text">
+          &#8203; &#x2022; <span>7412589635</span> &#x2022; 7412589635 &#x2022;
+          7412589635 &#x2022; 7412589635
         </div>
       </div>
       <svg

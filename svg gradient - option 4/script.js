@@ -97,14 +97,11 @@ function startGradientEffect() {
     const shadowOffsetX = Math.round(Math.cos((angle * Math.PI) / 180) * 10); // Scale as needed
     const shadowOffsetY = Math.round(Math.sin((angle * Math.PI) / 180) * 10); // Scale as needed
     svgElement.style.filter = `drop-shadow(${shadowOffsetX}px ${shadowOffsetY}px 10px rgba(0, 0, 0, 0.5))`;
-    // uptil here
-    // Define base colors for the gradient (vibrant colors)
     const baseColor1 = { r: 255, g: 120, b: 90 }; // Vibrant red-orange
     const baseColor2 = { r: 90, g: 180, b: 255 }; // Sky blue
     const baseColor3 = { r: 120, g: 255, b: 150 }; // Bright green
     const baseColor4 = { r: 255, g: 240, b: 120 }; // Vibrant yellow
 
-    // Amplify color changes for better visibility
     const color1 = {
       r: Math.min(255, baseColor1.r + normalizedX * 100),
       g: Math.min(255, baseColor1.g + normalizedY * 100),
@@ -222,7 +219,6 @@ function handleOrientation(event) {
   }
 }
 
-// Check for iOS and show the permission request button if needed
 if (typeof DeviceOrientationEvent.requestPermission === "function") {
   // document.getElementById("request-permission").style.display = "block";
   document
@@ -232,17 +228,6 @@ if (typeof DeviceOrientationEvent.requestPermission === "function") {
   // Directly add the event listener on non-iOS devices
   window.addEventListener("deviceorientation", handleOrientation);
 }
-
-// circle script
-// const text = document.querySelector(".text p");
-// text.innerHTML = text.innerText
-//   .split("")
-//   .map(
-//     (char, i) => `<span style="transform:rotate(${i * 7}deg); ">${char}</span>`
-//   )
-//   .join("");
-
-//vanta elm design
 
 function EnableVanta() {
   const elm = document.querySelector("#circle-elm");
@@ -257,7 +242,7 @@ function EnableVanta() {
       minWidth: 200.0,
       scale: 1.0,
       scaleMobile: 1.0,
-      color: 0x1e8fffc5, // Blue waves
+      color: 0x1e8fffc5,
       shininess: 50,
       waveHeight: 20,
       waveSpeed: 1,
@@ -266,20 +251,14 @@ function EnableVanta() {
     console.error("Vanta initialization error:", error);
   }
 }
-// EnableVanta();
-
-// rotating circle
 
 function RotateText() {
   const elm = document.querySelector("#text");
   elm.style.display = "block";
   const circleType = new CircleType(document.getElementById("text"));
 
-  // Set the text radius and direction. Note: setter methods are chainable.
-  circleType.radius(10).dir(1);
+  circleType.radius(45).dir(1);
 
-  // Provide your own splitter function to handle emojis
-  // @see https://github.com/orling/grapheme-splitter
   const splitter = new GraphemeSplitter();
   new CircleType(
     document.getElementById("text"),
