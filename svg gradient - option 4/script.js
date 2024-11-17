@@ -239,7 +239,10 @@ if (typeof DeviceOrientationEvent.requestPermission === "function") {
 //   .join("");
 
 //vanta elm design
-document.addEventListener("DOMContentLoaded", function () {
+
+function EnableVanta() {
+  const elm = document.querySelector("#circle-elm");
+  elm.style.removeProperty("background-color");
   try {
     VANTA.WAVES({
       el: "#circle-elm",
@@ -258,18 +261,24 @@ document.addEventListener("DOMContentLoaded", function () {
   } catch (error) {
     console.error("Vanta initialization error:", error);
   }
-});
+}
+// EnableVanta();
 
 // rotating circle
-const circleType = new CircleType(document.getElementById("text"));
 
-// Set the text radius and direction. Note: setter methods are chainable.
-circleType.radius(10).dir(1);
+function RotateText() {
+  const elm = document.querySelector("#text");
+  elm.style.display = "block";
+  const circleType = new CircleType(document.getElementById("text"));
 
-// Provide your own splitter function to handle emojis
-// @see https://github.com/orling/grapheme-splitter
-const splitter = new GraphemeSplitter();
-new CircleType(
-  document.getElementById("text"),
-  splitter.splitGraphemes.bind(splitter)
-);
+  // Set the text radius and direction. Note: setter methods are chainable.
+  circleType.radius(10).dir(1);
+
+  // Provide your own splitter function to handle emojis
+  // @see https://github.com/orling/grapheme-splitter
+  const splitter = new GraphemeSplitter();
+  new CircleType(
+    document.getElementById("text"),
+    splitter.splitGraphemes.bind(splitter)
+  );
+}

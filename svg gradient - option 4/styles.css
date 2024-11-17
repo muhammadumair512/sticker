@@ -84,6 +84,7 @@
 /* vanta elm */
 #circle-elm {
   /* color: #1e8fffc5; */
+  background-color: rgba(0, 255, 255, 0.3);
   position: absolute;
   z-index: -25;
   width: 83.3%;
@@ -195,6 +196,7 @@
 
 #text {
   color: rgba(18, 1, 1, 0.55);
+  display: none;
   /* font-size: small; */
   font-size: 12.2px;
 
