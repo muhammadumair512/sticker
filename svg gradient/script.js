@@ -233,38 +233,6 @@ function calculatePosition(degree, radius) {
   };
 }
 
-// function moveText(element, startDegree, endDegree, duration) {
-//   const radius = 300; // Radius of the circle-container
-//   const startPos = calculatePosition(startDegree, radius);
-//   const endPos = calculatePosition(endDegree, radius);
-//   const keyframes = [
-//     {
-//       transform: `translate(${startPos.x}px, ${startPos.y}px) rotate(30deg)`,
-//     },
-//     {
-//       transform: `translate(${endPos.x}px, ${endPos.y}px) rotate(30deg)`,
-//     },
-//   ];
-//   element.animate(keyframes, {
-//     duration: duration,
-//     iterations: Infinity,
-//     easing: "linear",
-//   });
-// }
-
-document.addEventListener("DOMContentLoaded", () => {
-  moveText(document.querySelector(".text1"), 269, 89, 10000);
-  moveText(document.querySelector(".text2"), 94, 270, 10000);
-  moveText(document.querySelector(".text3"), 279, 98, 10000);
-  moveText(document.querySelector(".text4"), 260, 100, 10000);
-  moveText(document.querySelector(".text5"), 105, 255, 10000);
-  moveText(document.querySelector(".text6"), 125, 235, 10000);
-  moveText(document.querySelector(".text7"), 125, 235, 10000);
-  moveText(document.querySelector(".text8"), 125, 235, 10000);
-  moveText(document.querySelector(".text9"), 125, 235, 10000);
-  moveText(document.querySelector(".text10"), 125, 235, 10000);
-});
-
 //vanta elm design
 document.addEventListener("DOMContentLoaded", function () {
   try {

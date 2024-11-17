@@ -1,3 +1,7 @@
+window.addEventListener("load", () => {
+  EnableVanta();
+  RotateText();
+});
 const gradientElement = document.querySelector("#gradient1");
 
 const red = 228;
